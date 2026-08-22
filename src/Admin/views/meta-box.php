@@ -22,7 +22,7 @@ $fopost_social_platform_labels = \Fopost\Social\Wp\Admin\SettingsPage::platforms
             <?php
             printf(
                 /* translators: %s: link open tag, %s: link close tag */
-                esc_html__('No platforms configured. %1$sConfigure platforms%2$s in Owlstack settings.', 'fopost-social'),
+                esc_html__('No platforms configured. %1$sConfigure platforms%2$s in FoPost Social settings.', 'fopost-social'),
                 '<a href="' . esc_url(admin_url('admin.php?page=fopost-social')) . '">',
                 '</a>',
             );

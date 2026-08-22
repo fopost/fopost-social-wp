@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 use Fopost\Social\Config\FopostConfig;
 
 /**
- * Manages Owlstack plugin settings stored in wp_options.
+ * Manages FoPost Social plugin settings stored in wp_options.
  *
  * Provides a bridge between WordPress options and FopostConfig.
  */

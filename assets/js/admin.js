@@ -1,5 +1,5 @@
 /**
- * Owlstack WordPress Admin Scripts
+ * FoPost Social WordPress Admin Scripts
  *
  * @package Fopost\Social\Wp
  */

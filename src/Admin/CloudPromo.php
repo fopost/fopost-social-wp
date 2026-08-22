@@ -7,16 +7,16 @@ namespace Fopost\Social\Wp\Admin;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Explains OwlStack Cloud on the plugin's own admin screens.
+ * Explains the hosted FoPost product on the plugin's own admin screens.
  *
  * Stays inside the plugin's pages: no site-wide notices, and the Settings
  * card is dismissible per user.
  */
 class CloudPromo
 {
-    public const SITE_URL = 'https://owlstack.app';
+    public const SITE_URL = 'https://fopost.com';
 
-    /** Platforms reachable through Cloud, against the 11 this plugin publishes to directly. */
+    /** Platforms reachable through hosted FoPost, against the 11 this plugin publishes to directly. */
     public const CLOUD_PLATFORM_COUNT = 31;
 
     private const DISMISS_META = 'fopost_social_cloud_promo_dismissed';

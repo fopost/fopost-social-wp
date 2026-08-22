@@ -12,7 +12,7 @@ if (! defined('ABSPATH')) {
 /** @var array $args */
 ?>
 <div class="wrap fopost-social-delivery-logs">
-    <h1><?php esc_html_e('Owlstack Delivery Logs', 'fopost-social'); ?></h1>
+    <h1><?php esc_html_e('FoPost Social Delivery Logs', 'fopost-social'); ?></h1>
 
     <?php settings_errors('fopost_social_logs'); ?>
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Owlstack Uninstall
+ * FoPost Social Uninstall
  *
  * Fired when the plugin is uninstalled. Cleans up all plugin data
  * including options, custom database tables, and capabilities.

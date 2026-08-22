@@ -91,7 +91,7 @@ class WpTokenStore implements TokenStoreInterface
         if ($encrypted === false) {
             wp_trigger_error(
                 __METHOD__,
-                '[Owlstack] OpenSSL encryption failed. Storing token with base64 encoding only. Install the OpenSSL PHP extension for proper encryption.',
+                '[FoPost Social] OpenSSL encryption failed. Storing token with base64 encoding only. Install the OpenSSL PHP extension for proper encryption.',
                 E_USER_NOTICE,
             );
 

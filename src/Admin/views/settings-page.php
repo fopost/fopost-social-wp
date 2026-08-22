@@ -23,13 +23,13 @@ if (! defined('ABSPATH')) {
     <?php if (! \Fopost\Social\Wp\Admin\CloudPromo::isDismissed()): ?>
         <div class="fopost-social-cloud-promo notice notice-info">
             <h2 class="fopost-social-cloud-promo__title">
-                <?php esc_html_e('Publish beyond this site with OwlStack Cloud', 'fopost-social'); ?>
+                <?php esc_html_e('Publish beyond this site with hosted FoPost', 'fopost-social'); ?>
             </h2>
             <p>
                 <?php
                 printf(
-                    /* translators: 1: platforms this plugin supports, 2: platforms OwlStack Cloud supports */
-                    esc_html__('This plugin publishes to %1$d platforms straight from WordPress using your own credentials, and it always will. OwlStack Cloud reaches %2$d platforms and adds scheduling, a content calendar, analytics, and AI drafting, with this site as one of its destinations.', 'fopost-social'),
+                    /* translators: 1: platforms this plugin supports, 2: platforms hosted FoPost supports */
+                    esc_html__('This plugin publishes to %1$d platforms straight from WordPress using your own credentials, and it always will. Hosted FoPost reaches %2$d platforms and adds scheduling, a content calendar, analytics, and AI drafting, with this site as one of its destinations.', 'fopost-social'),
                     count($platforms),
                     (int) \Fopost\Social\Wp\Admin\CloudPromo::CLOUD_PLATFORM_COUNT,
                 );
@@ -97,9 +97,9 @@ if (! defined('ABSPATH')) {
         <p>
             <?php
             printf(
-                /* translators: %s: link to OwlStack documentation */
+                /* translators: %s: link to FoPost documentation */
                 esc_html__('Need help setting up your social media platforms such as Telegram, Twitter, Facebook, Instagram, LinkedIn, or others? Our documentation covers step-by-step guides for configuring each platform with the WordPress plugin. Visit the %s to get started.', 'fopost-social'),
-                '<a href="https://owlstack.app/docs/sdks/wordpress/installation" target="_blank" rel="noopener noreferrer">' . esc_html__('OwlStack Documentation', 'fopost-social') . '</a>'
+                '<a href="https://fopost.com/docs/sdks/wordpress/installation" target="_blank" rel="noopener noreferrer">' . esc_html__('FoPost Documentation', 'fopost-social') . '</a>'
             );
             ?>
         </p>

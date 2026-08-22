@@ -10,7 +10,7 @@ use Fopost\Social\Wp\Plugin;
 use WP_Post;
 
 /**
- * Registers the Owlstack publish meta box on post edit screens.
+ * Registers the FoPost Social publish meta box on post edit screens.
  */
 class MetaBox
 {
@@ -30,7 +30,7 @@ class MetaBox
         foreach ($postTypes as $postType) {
             add_meta_box(
                 id: 'fopost-social-publish',
-                title: __('Owlstack — Publish to Social Media', 'fopost-social'),
+                title: __('FoPost Social: Publish to Social Media', 'fopost-social'),
                 callback: [$this, 'render'],
                 screen: $postType,
                 context: 'side',

@@ -356,7 +356,7 @@ class Plugin
     }
 
     /**
-     * Enqueue admin CSS and JS on Owlstack admin pages.
+     * Enqueue admin CSS and JS on FoPost Social admin pages.
      */
     public function enqueueAdminAssets(string $hook): void
     {

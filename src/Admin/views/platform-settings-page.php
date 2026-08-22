@@ -15,7 +15,7 @@ if (! defined('ABSPATH')) {
         <?php
         printf(
             /* translators: %s: platform name */
-            esc_html__('Owlstack — %s Settings', 'fopost-social'),
+            esc_html__('FoPost Social: %s Settings', 'fopost-social'),
             esc_html($platform['label']),
         );
         ?>
@@ -100,7 +100,7 @@ if (! defined('ABSPATH')) {
                             <?php
                             printf(
                                 /* translators: %s: platform name */
-                                esc_html__('In the Owlstack meta box on the post editor, select "%s" as a target platform.', 'fopost-social'),
+                                esc_html__('In the FoPost Social meta box on the post editor, select "%s" as a target platform.', 'fopost-social'),
                                 esc_html($platform['label']),
                             );
                             ?>

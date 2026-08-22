@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 use Fopost\Social\Events\Contracts\EventDispatcherInterface;
 
 /**
- * Bridges Owlstack Core's EventDispatcherInterface to WordPress actions.
+ * Bridges FoPost Social Core's EventDispatcherInterface to WordPress actions.
  *
  * Dispatches events as WordPress actions so developers can hook in
  * using standard add_action() calls:

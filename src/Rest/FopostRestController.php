@@ -12,7 +12,7 @@ use Fopost\Social\Wp\Database\DeliveryLog;
 use Fopost\Social\Wp\Plugin;
 
 /**
- * REST API controller for Owlstack endpoints.
+ * REST API controller for FoPost Social endpoints.
  *
  * Registers routes under the `fopost-social/v1` namespace:
  *   POST   /fopost-social/v1/test-connection
@@ -152,7 +152,7 @@ class FopostRestController
         } catch (\Throwable $e) {
             wp_trigger_error(
                 __METHOD__,
-                '[Owlstack] Test connection error: ' . $e->getMessage(),
+                '[FoPost Social] Test connection error: ' . $e->getMessage(),
                 E_USER_NOTICE,
             );
 
@@ -191,9 +191,9 @@ class FopostRestController
             $timestamp = wp_date('Y-m-d H:i:s');
 
             $post = new Post(
-                title: sprintf('Owlstack Test — %s', $siteTitle),
+                title: sprintf('FoPost Social Test — %s', $siteTitle),
                 body: sprintf(
-                    "This is a test message from Owlstack on %s.\n\nSite: %s\nPlatform: %s\nTime: %s\n\nIf you see this message, your %s integration is working correctly! 🎉",
+                    "This is a test message from FoPost Social on %s.\n\nSite: %s\nPlatform: %s\nTime: %s\n\nIf you see this message, your %s integration is working correctly! 🎉",
                     $siteTitle,
                     $siteUrl,
                     $label,
@@ -232,7 +232,7 @@ class FopostRestController
         } catch (\Throwable $e) {
             wp_trigger_error(
                 __METHOD__,
-                "[Owlstack] Test message error ({$platform}): " . $e->getMessage(),
+                "[FoPost Social] Test message error ({$platform}): " . $e->getMessage(),
                 E_USER_NOTICE,
             );
 
@@ -416,7 +416,7 @@ class FopostRestController
         } catch (\Throwable $e) {
             wp_trigger_error(
                 __METHOD__,
-                "[Owlstack] {$label} test error: " . $e->getMessage(),
+                "[FoPost Social] {$label} test error: " . $e->getMessage(),
                 E_USER_NOTICE,
             );
 
