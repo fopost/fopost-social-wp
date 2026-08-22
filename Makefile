@@ -1,9 +1,9 @@
 # ────────────────────────────────────────────────────────────
-# Owlstack WordPress Plugin — Makefile
+# FoPost Social WordPress Plugin Makefile
 # ────────────────────────────────────────────────────────────
 
-PLUGIN_SLUG  := owlstack
-VERSION      ?= $(shell grep -i 'Version:' owlstack.php | head -1 | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
+PLUGIN_SLUG  := fopost-social
+VERSION      ?= $(shell grep -i 'Version:' fopost-social.php | head -1 | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
 DIST_DIR     := dist
 BUILD_DIR    := $(DIST_DIR)/$(PLUGIN_SLUG)
 ZIP_FILE     := $(DIST_DIR)/$(PLUGIN_SLUG)-$(VERSION).zip
@@ -11,7 +11,7 @@ ZIP_FILE     := $(DIST_DIR)/$(PLUGIN_SLUG)-$(VERSION).zip
 # SVN settings
 SVN_URL      := https://plugins.svn.wordpress.org/$(PLUGIN_SLUG)
 SVN_DIR      := .svn-wp
-SVN_USER     := alihesari
+SVN_USER     := fopost
 
 .DEFAULT_GOAL := help
 
@@ -208,12 +208,12 @@ release: lint test svn-sync svn-tag svn-push ## Full release: lint → test → 
 
 .PHONY: version-check
 version-check: ## Verify version is consistent across files
-	@PHP_VER=$$(grep -i 'Version:' owlstack.php | head -1 | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]'); \
+	@PHP_VER=$$(grep -i 'Version:' fopost-social.php | head -1 | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]'); \
 	README_VER=$$(grep -i 'Stable tag:' readme.txt | head -1 | sed 's/.*Stable tag:[[:space:]]*//' | tr -d '[:space:]'); \
-	CONST_VER=$$(grep "OWLSTACK_VERSION" owlstack.php | head -1 | sed "s/.*'\\(.*\\)'.*/\\1/"); \
-	echo "  owlstack.php header : $$PHP_VER"; \
+	CONST_VER=$$(grep "FOPOST_SOCIAL_VERSION" fopost-social.php | head -1 | sed "s/.*'\\(.*\\)'.*/\\1/"); \
+	echo "  fopost-social.php header : $$PHP_VER"; \
 	echo "  readme.txt Stable tag: $$README_VER"; \
-	echo "  OWLSTACK_VERSION     : $$CONST_VER"; \
+	echo "  FOPOST_SOCIAL_VERSION     : $$CONST_VER"; \
 	if [ "$$PHP_VER" = "$$README_VER" ] && [ "$$PHP_VER" = "$$CONST_VER" ]; then \
 		echo "  ✓ All versions match ($$PHP_VER)"; \
 	else \
@@ -228,10 +228,10 @@ version-bump: ## Bump version: make version-bump V=1.2.0
 		exit 1; \
 	fi
 	@echo "==> Bumping version to $(V)…"
-	@sed -i '' "s/^ \* Version:.*/ * Version:           $(V)/" owlstack.php
-	@sed -i '' "s/^define('OWLSTACK_VERSION', '.*');/define('OWLSTACK_VERSION', '$(V)');/" owlstack.php
+	@sed -i '' "s/^ \* Version:.*/ * Version:           $(V)/" fopost-social.php
+	@sed -i '' "s/^define('FOPOST_SOCIAL_VERSION', '.*');/define('FOPOST_SOCIAL_VERSION', '$(V)');/" fopost-social.php
 	@sed -i '' "s/^Stable tag:.*/Stable tag: $(V)/" readme.txt
-	@echo "==> Version updated to $(V) in owlstack.php and readme.txt"
+	@echo "==> Version updated to $(V) in fopost-social.php and readme.txt"
 	@$(MAKE) --no-print-directory version-check
 
 # ── Help ─────────────────────────────────────────────────────

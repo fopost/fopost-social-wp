@@ -11,35 +11,35 @@ if (! defined('ABSPATH')) {
 /** @var int $totalPages */
 /** @var array $args */
 ?>
-<div class="wrap owlstack-delivery-logs">
-    <h1><?php esc_html_e('Owlstack Delivery Logs', 'owlstack'); ?></h1>
+<div class="wrap fopost-social-delivery-logs">
+    <h1><?php esc_html_e('FoPost Social Delivery Logs', 'fopost-social'); ?></h1>
 
-    <?php settings_errors('owlstack_logs'); ?>
+    <?php settings_errors('fopost_social_logs'); ?>
 
     <!-- Filters -->
     <div class="tablenav top">
-        <form method="get" class="owlstack-logs-filter">
-            <input type="hidden" name="page" value="owlstack-logs" />
+        <form method="get" class="fopost-social-logs-filter">
+            <input type="hidden" name="page" value="fopost-social-logs" />
 
             <select name="platform">
-                <option value=""><?php esc_html_e('All Platforms', 'owlstack'); ?></option>
-                <?php foreach (['telegram', 'twitter', 'facebook'] as $owlstack_p) : ?>
-                    <option value="<?php echo esc_attr($owlstack_p); ?>" <?php selected($args['platform'], $owlstack_p); ?>>
-                        <?php echo esc_html(ucfirst($owlstack_p === 'twitter' ? 'X (Twitter)' : $owlstack_p)); ?>
+                <option value=""><?php esc_html_e('All Platforms', 'fopost-social'); ?></option>
+                <?php foreach (['telegram', 'twitter', 'facebook'] as $fopost_social_p) : ?>
+                    <option value="<?php echo esc_attr($fopost_social_p); ?>" <?php selected($args['platform'], $fopost_social_p); ?>>
+                        <?php echo esc_html(ucfirst($fopost_social_p === 'twitter' ? 'X (Twitter)' : $fopost_social_p)); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
 
             <select name="status">
-                <option value=""><?php esc_html_e('All Statuses', 'owlstack'); ?></option>
-                <?php foreach (['pending', 'publishing', 'published', 'failed'] as $owlstack_status) : ?>
-                    <option value="<?php echo esc_attr($owlstack_status); ?>" <?php selected($args['status'], $owlstack_status); ?>>
-                        <?php echo esc_html(ucfirst($owlstack_status)); ?>
+                <option value=""><?php esc_html_e('All Statuses', 'fopost-social'); ?></option>
+                <?php foreach (['pending', 'publishing', 'published', 'failed'] as $fopost_social_status) : ?>
+                    <option value="<?php echo esc_attr($fopost_social_status); ?>" <?php selected($args['status'], $fopost_social_status); ?>>
+                        <?php echo esc_html(ucfirst($fopost_social_status)); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
 
-            <?php submit_button(__('Filter', 'owlstack'), 'secondary', 'filter', false); ?>
+            <?php submit_button(__('Filter', 'fopost-social'), 'secondary', 'filter', false); ?>
         </form>
 
         <div class="tablenav-pages">
@@ -47,7 +47,7 @@ if (! defined('ABSPATH')) {
                 <?php
                 printf(
                     /* translators: %s: number of items */
-                    esc_html(_n('%s item', '%s items', $total, 'owlstack')),
+                    esc_html(_n('%s item', '%s items', $total, 'fopost-social')),
                     esc_html(number_format_i18n($total)),
                 );
                 ?>
@@ -69,68 +69,68 @@ if (! defined('ABSPATH')) {
 
     <!-- Log table -->
     <form method="post">
-        <?php wp_nonce_field('owlstack_logs_bulk', 'owlstack_logs_nonce'); ?>
-        <input type="hidden" name="owlstack_bulk_action" value="" />
+        <?php wp_nonce_field('fopost_social_logs_bulk', 'fopost_social_logs_nonce'); ?>
+        <input type="hidden" name="fopost_social_bulk_action" value="" />
 
-        <table class="wp-list-table widefat fixed striped owlstack-logs-table">
+        <table class="wp-list-table widefat fixed striped fopost-social-logs-table">
             <thead>
                 <tr>
                     <td class="manage-column column-cb check-column">
                         <input type="checkbox" id="cb-select-all-1" />
                     </td>
-                    <th><?php esc_html_e('Date', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('Post', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('Platform', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('Status', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('External URL', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('Error', 'owlstack'); ?></th>
-                    <th><?php esc_html_e('Actions', 'owlstack'); ?></th>
+                    <th><?php esc_html_e('Date', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('Post', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('Platform', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('Status', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('External URL', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('Error', 'fopost-social'); ?></th>
+                    <th><?php esc_html_e('Actions', 'fopost-social'); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($items)) : ?>
                     <tr>
-                        <td colspan="8"><?php esc_html_e('No delivery logs found.', 'owlstack'); ?></td>
+                        <td colspan="8"><?php esc_html_e('No delivery logs found.', 'fopost-social'); ?></td>
                     </tr>
                 <?php else : ?>
-                    <?php foreach ($items as $owlstack_item) : ?>
+                    <?php foreach ($items as $fopost_social_item) : ?>
                         <tr>
                             <th class="check-column">
-                                <input type="checkbox" name="log_ids[]" value="<?php echo esc_attr((string) $owlstack_item->id); ?>" />
+                                <input type="checkbox" name="log_ids[]" value="<?php echo esc_attr((string) $fopost_social_item->id); ?>" />
                             </th>
-                            <td><?php echo esc_html(wp_date(get_option('date_format') . ' ' . get_option('time_format'), strtotime($owlstack_item->created_at))); ?></td>
+                            <td><?php echo esc_html(wp_date(get_option('date_format') . ' ' . get_option('time_format'), strtotime($fopost_social_item->created_at))); ?></td>
                             <td>
-                                <?php if ($owlstack_item->post_id) : ?>
-                                    <a href="<?php echo esc_url(get_edit_post_link((int) $owlstack_item->post_id) ?? '#'); ?>">
-                                        <?php echo esc_html(get_the_title((int) $owlstack_item->post_id) ? get_the_title((int) $owlstack_item->post_id) : "#{$owlstack_item->post_id}"); ?>
+                                <?php if ($fopost_social_item->post_id) : ?>
+                                    <a href="<?php echo esc_url(get_edit_post_link((int) $fopost_social_item->post_id) ?? '#'); ?>">
+                                        <?php echo esc_html(get_the_title((int) $fopost_social_item->post_id) ? get_the_title((int) $fopost_social_item->post_id) : "#{$fopost_social_item->post_id}"); ?>
                                     </a>
                                 <?php else : ?>
                                     &mdash;
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <span class="owlstack-platform owlstack-platform-<?php echo esc_attr($owlstack_item->platform); ?>">
-                                    <?php echo esc_html(ucfirst($owlstack_item->platform === 'twitter' ? 'X (Twitter)' : $owlstack_item->platform)); ?>
+                                <span class="fopost-social-platform fopost-social-platform-<?php echo esc_attr($fopost_social_item->platform); ?>">
+                                    <?php echo esc_html(ucfirst($fopost_social_item->platform === 'twitter' ? 'X (Twitter)' : $fopost_social_item->platform)); ?>
                                 </span>
                             </td>
                             <td>
-                                <span class="owlstack-status owlstack-status-<?php echo esc_attr($owlstack_item->status); ?>">
-                                    <?php echo esc_html(ucfirst($owlstack_item->status)); ?>
+                                <span class="fopost-social-status fopost-social-status-<?php echo esc_attr($fopost_social_item->status); ?>">
+                                    <?php echo esc_html(ucfirst($fopost_social_item->status)); ?>
                                 </span>
                             </td>
                             <td>
-                                <?php if ($owlstack_item->external_url) : ?>
-                                    <a href="<?php echo esc_url($owlstack_item->external_url); ?>" target="_blank" rel="noopener">
-                                        <?php esc_html_e('View', 'owlstack'); ?> &#8599;
+                                <?php if ($fopost_social_item->external_url) : ?>
+                                    <a href="<?php echo esc_url($fopost_social_item->external_url); ?>" target="_blank" rel="noopener">
+                                        <?php esc_html_e('View', 'fopost-social'); ?> &#8599;
                                     </a>
                                 <?php else : ?>
                                     &mdash;
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?php if ($owlstack_item->error) : ?>
-                                    <span class="owlstack-error-text" title="<?php echo esc_attr($owlstack_item->error); ?>">
-                                        <?php echo esc_html(mb_strimwidth($owlstack_item->error, 0, 80, '...')); ?>
+                                <?php if ($fopost_social_item->error) : ?>
+                                    <span class="fopost-social-error-text" title="<?php echo esc_attr($fopost_social_item->error); ?>">
+                                        <?php echo esc_html(mb_strimwidth($fopost_social_item->error, 0, 80, '...')); ?>
                                     </span>
                                 <?php else : ?>
                                     &mdash;
@@ -138,16 +138,16 @@ if (! defined('ABSPATH')) {
                             </td>
                             <td>
                                 <?php
-                                $owlstack_delete_url = wp_nonce_url(
+                                $fopost_social_delete_url = wp_nonce_url(
                                     add_query_arg(
-                                        ['action' => 'delete', 'log_id' => $owlstack_item->id],
-                                        admin_url('admin.php?page=owlstack-logs'),
+                                        ['action' => 'delete', 'log_id' => $fopost_social_item->id],
+                                        admin_url('admin.php?page=fopost-social-logs'),
                                     ),
-                                    'owlstack_delete_log_' . $owlstack_item->id,
+                                    'fopost_social_delete_log_' . $fopost_social_item->id,
                                 );
                                 ?>
-                                <a href="<?php echo esc_url($owlstack_delete_url); ?>" class="owlstack-delete-link" onclick="return confirm('<?php esc_attr_e('Delete this log entry?', 'owlstack'); ?>');">
-                                    <?php esc_html_e('Delete', 'owlstack'); ?>
+                                <a href="<?php echo esc_url($fopost_social_delete_url); ?>" class="fopost-social-delete-link" onclick="return confirm('<?php esc_attr_e('Delete this log entry?', 'fopost-social'); ?>');">
+                                    <?php esc_html_e('Delete', 'fopost-social'); ?>
                                 </a>
                             </td>
                         </tr>
@@ -157,8 +157,8 @@ if (! defined('ABSPATH')) {
         </table>
 
         <div class="tablenav bottom">
-            <button type="submit" class="button" onclick="this.form.owlstack_bulk_action.value='delete'; return confirm('<?php esc_attr_e('Delete selected entries?', 'owlstack'); ?>');">
-                <?php esc_html_e('Delete Selected', 'owlstack'); ?>
+            <button type="submit" class="button" onclick="this.form.fopost_social_bulk_action.value='delete'; return confirm('<?php esc_attr_e('Delete selected entries?', 'fopost-social'); ?>');">
+                <?php esc_html_e('Delete Selected', 'fopost-social'); ?>
             </button>
         </div>
     </form>

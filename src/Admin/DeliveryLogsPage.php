@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Admin;
+namespace Fopost\Social\Wp\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\WordPress\Database\DeliveryLog;
+use Fopost\Social\Wp\Database\DeliveryLog;
 
 /**
  * Admin page for viewing delivery logs.
@@ -19,11 +19,11 @@ class DeliveryLogsPage
     public function register(): void
     {
         add_submenu_page(
-            parent_slug: 'owlstack',
-            page_title: __('Delivery Logs', 'owlstack'),
-            menu_title: __('Delivery Logs', 'owlstack'),
+            parent_slug: 'fopost-social',
+            page_title: __('Delivery Logs', 'fopost-social'),
+            menu_title: __('Delivery Logs', 'fopost-social'),
             capability: 'manage_options',
-            menu_slug: 'owlstack-logs',
+            menu_slug: 'fopost-social-logs',
             callback: [$this, 'render'],
         );
     }
@@ -39,8 +39,8 @@ class DeliveryLogsPage
 
         // Handle bulk delete.
         if (
-            isset($_POST['owlstack_bulk_action']) // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in handleBulkDelete().
-            && sanitize_text_field(wp_unslash($_POST['owlstack_bulk_action'])) === 'delete' // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            isset($_POST['fopost_social_bulk_action']) // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in handleBulkDelete().
+            && sanitize_text_field(wp_unslash($_POST['fopost_social_bulk_action'])) === 'delete' // phpcs:ignore WordPress.Security.NonceVerification.Missing
         ) {
             $this->handleBulkDelete();
         }
@@ -76,8 +76,8 @@ class DeliveryLogsPage
     private function handleBulkDelete(): void
     {
         if (
-            ! isset($_POST['owlstack_logs_nonce'])
-            || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['owlstack_logs_nonce'])), 'owlstack_logs_bulk')
+            ! isset($_POST['fopost_social_logs_nonce'])
+            || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['fopost_social_logs_nonce'])), 'fopost_social_logs_bulk')
         ) {
             return;
         }
@@ -91,11 +91,11 @@ class DeliveryLogsPage
         }
 
         add_settings_error(
-            'owlstack_logs',
+            'fopost_social_logs',
             'bulk_deleted',
             sprintf(
                 /* translators: %d: number of deleted entries */
-                __('%d log entries deleted.', 'owlstack'),
+                __('%d log entries deleted.', 'fopost-social'),
                 count($ids),
             ),
             'success',
@@ -109,7 +109,7 @@ class DeliveryLogsPage
         if (
             $logId <= 0
             || ! isset($_GET['_wpnonce'])
-            || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'owlstack_delete_log_' . $logId)
+            || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'fopost_social_delete_log_' . $logId)
         ) {
             return;
         }
@@ -117,9 +117,9 @@ class DeliveryLogsPage
         DeliveryLog::delete($logId);
 
         add_settings_error(
-            'owlstack_logs',
+            'fopost_social_logs',
             'deleted',
-            __('Log entry deleted.', 'owlstack'),
+            __('Log entry deleted.', 'fopost-social'),
             'success',
         );
     }

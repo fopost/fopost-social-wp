@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Http;
+namespace Fopost\Social\Wp\Http;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Exceptions\OwlstackException;
-use Owlstack\Core\Http\Contracts\HttpClientInterface;
+use Fopost\Social\Exceptions\FopostException;
+use Fopost\Social\Http\Contracts\HttpClientInterface;
 
 /**
  * WordPress HTTP API implementation of HttpClientInterface.
@@ -50,7 +50,7 @@ class WpHttpClient implements HttpClientInterface
      * @param array  $options Request options (headers, json, body, form_params, multipart, query).
      * @return array{status: int, headers: array, body: string}
      *
-     * @throws OwlstackException On WP_Error or request failure.
+     * @throws FopostException On WP_Error or request failure.
      */
     private function request(string $method, string $url, array $options = []): array
     {
@@ -82,7 +82,7 @@ class WpHttpClient implements HttpClientInterface
         $response = wp_remote_request($url, $args);
 
         if (is_wp_error($response)) {
-            throw new OwlstackException(
+            throw new FopostException(
                 'HTTP request failed: ' . esc_html($response->get_error_message())
             );
         }

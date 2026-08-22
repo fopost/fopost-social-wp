@@ -2,49 +2,45 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress;
+namespace Fopost\Social\Wp;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Config\OwlstackConfig;
-use Owlstack\Core\Events\Contracts\EventDispatcherInterface;
-use Owlstack\Core\Formatting\CharacterTruncator;
-use Owlstack\Core\Formatting\HashtagExtractor;
-use Owlstack\Core\Http\Contracts\HttpClientInterface;
-use Owlstack\Core\Platforms\Discord\DiscordFormatter;
-use Owlstack\Core\Platforms\Discord\DiscordPlatform;
-use Owlstack\Core\Platforms\Facebook\FacebookFormatter;
-use Owlstack\Core\Platforms\Facebook\FacebookPlatform;
-use Owlstack\Core\Platforms\Instagram\InstagramPlatform;
-use Owlstack\Core\Platforms\LinkedIn\LinkedInFormatter;
-use Owlstack\Core\Platforms\LinkedIn\LinkedInPlatform;
-use Owlstack\Core\Platforms\Pinterest\PinterestPlatform;
-use Owlstack\Core\Platforms\PlatformRegistry;
-use Owlstack\Core\Platforms\Reddit\RedditFormatter;
-use Owlstack\Core\Platforms\Reddit\RedditPlatform;
-use Owlstack\Core\Platforms\Slack\SlackPlatform;
-use Owlstack\Core\Platforms\Telegram\TelegramFormatter;
-use Owlstack\Core\Platforms\Telegram\TelegramPlatform;
-use Owlstack\Core\Platforms\Tumblr\TumblrPlatform;
-use Owlstack\Core\Platforms\Twitter\TwitterFormatter;
-use Owlstack\Core\Platforms\Twitter\TwitterPlatform;
-use Owlstack\Core\Platforms\WhatsApp\WhatsAppPlatform;
-use Owlstack\Core\Publishing\Publisher;
-use Owlstack\WordPress\Admin\CloudPromo;
-use Owlstack\WordPress\Admin\CloudSettingsPage;
-use Owlstack\WordPress\Admin\DeliveryLogsPage;
-use Owlstack\WordPress\Admin\MetaBox;
-use Owlstack\WordPress\Admin\OptionsManager;
-use Owlstack\WordPress\Admin\SettingsPage;
-use Owlstack\WordPress\Auth\WpTokenStore;
-use Owlstack\WordPress\Cloud\CloudSettings;
-use Owlstack\WordPress\Cloud\CloudTokenService;
-use Owlstack\WordPress\Events\WpEventDispatcher;
-use Owlstack\WordPress\Http\WpHttpClient;
-use Owlstack\WordPress\Publishing\PostPublisher;
-use Owlstack\WordPress\Publishing\SendTo;
-use Owlstack\WordPress\Rest\CloudRestController;
-use Owlstack\WordPress\Rest\OwlstackRestController;
+use Fopost\Social\Config\FopostConfig;
+use Fopost\Social\Events\Contracts\EventDispatcherInterface;
+use Fopost\Social\Formatting\CharacterTruncator;
+use Fopost\Social\Formatting\HashtagExtractor;
+use Fopost\Social\Http\Contracts\HttpClientInterface;
+use Fopost\Social\Platforms\Discord\DiscordFormatter;
+use Fopost\Social\Platforms\Discord\DiscordPlatform;
+use Fopost\Social\Platforms\Facebook\FacebookFormatter;
+use Fopost\Social\Platforms\Facebook\FacebookPlatform;
+use Fopost\Social\Platforms\Instagram\InstagramPlatform;
+use Fopost\Social\Platforms\LinkedIn\LinkedInFormatter;
+use Fopost\Social\Platforms\LinkedIn\LinkedInPlatform;
+use Fopost\Social\Platforms\Pinterest\PinterestPlatform;
+use Fopost\Social\Platforms\PlatformRegistry;
+use Fopost\Social\Platforms\Reddit\RedditFormatter;
+use Fopost\Social\Platforms\Reddit\RedditPlatform;
+use Fopost\Social\Platforms\Slack\SlackPlatform;
+use Fopost\Social\Platforms\Telegram\TelegramFormatter;
+use Fopost\Social\Platforms\Telegram\TelegramPlatform;
+use Fopost\Social\Platforms\Tumblr\TumblrPlatform;
+use Fopost\Social\Platforms\Twitter\TwitterFormatter;
+use Fopost\Social\Platforms\Twitter\TwitterPlatform;
+use Fopost\Social\Platforms\WhatsApp\WhatsAppPlatform;
+use Fopost\Social\Publishing\Publisher;
+use Fopost\Social\Wp\Admin\CloudPromo;
+use Fopost\Social\Wp\Admin\DeliveryLogsPage;
+use Fopost\Social\Wp\Admin\MetaBox;
+use Fopost\Social\Wp\Admin\OptionsManager;
+use Fopost\Social\Wp\Admin\SettingsPage;
+use Fopost\Social\Wp\Auth\WpTokenStore;
+use Fopost\Social\Wp\Events\WpEventDispatcher;
+use Fopost\Social\Wp\Http\WpHttpClient;
+use Fopost\Social\Wp\Publishing\PostPublisher;
+use Fopost\Social\Wp\Publishing\SendTo;
+use Fopost\Social\Wp\Rest\FopostRestController;
 
 /**
  * Main plugin class — wires all services and registers WordPress hooks.
@@ -53,7 +49,7 @@ class Plugin
 {
     private static ?self $instance = null;
 
-    private ?OwlstackConfig $config = null;
+    private ?FopostConfig $config = null;
     private ?HttpClientInterface $httpClient = null;
     private ?EventDispatcherInterface $eventDispatcher = null;
     private ?PlatformRegistry $registry = null;
@@ -92,6 +88,9 @@ class Plugin
 
         $this->booted = true;
 
+        // Carry data forward from the plugin's previous `owlstack` prefix.
+        LegacyDataMigrator::run();
+
         // Build services.
         $this->buildServices();
 
@@ -104,8 +103,7 @@ class Plugin
         add_action('admin_notices', [$this, 'showActivationNotice']);
 
         // REST API.
-        add_action('rest_api_init', [OwlstackRestController::class, 'register']);
-        add_action('rest_api_init', [CloudRestController::class, 'register']);
+        add_action('rest_api_init', [FopostRestController::class, 'register']);
 
         // Post publishing hook.
         add_action('transition_post_status', [PostPublisher::class, 'handle'], 10, 3);
@@ -113,7 +111,7 @@ class Plugin
 
     // ── Service accessors ────────────────────────────────────────────────
 
-    public function config(): OwlstackConfig
+    public function config(): FopostConfig
     {
         if ($this->config === null) {
             $this->buildServices();
@@ -329,11 +327,6 @@ class Plugin
         $logsPage = new DeliveryLogsPage();
         add_action('admin_menu', [$logsPage, 'register']);
 
-        $cloudTokens = new CloudTokenService();
-        $cloudPage = new CloudSettingsPage($cloudTokens, new CloudSettings($cloudTokens));
-        add_action('admin_menu', [$cloudPage, 'register']);
-        $cloudPage->registerActions();
-
         CloudPromo::registerActions();
 
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -344,7 +337,7 @@ class Plugin
      */
     public function showActivationNotice(): void
     {
-        $notice = get_transient('owlstack_activation_notice');
+        $notice = get_transient('fopost_social_activation_notice');
 
         if ($notice === false || ! is_array($notice)) {
             return;
@@ -359,63 +352,62 @@ class Plugin
             esc_html($message),
         );
 
-        delete_transient('owlstack_activation_notice');
+        delete_transient('fopost_social_activation_notice');
     }
 
     /**
-     * Enqueue admin CSS and JS on Owlstack admin pages.
+     * Enqueue admin CSS and JS on FoPost Social admin pages.
      */
     public function enqueueAdminAssets(string $hook): void
     {
-        $owlstackPages = [
-            'toplevel_page_owlstack',
-            'owlstack_page_owlstack-logs',
-            'owlstack_page_owlstack-cloud',
-            'owlstack_page_owlstack-telegram',
-            'owlstack_page_owlstack-twitter',
-            'owlstack_page_owlstack-facebook',
-            'owlstack_page_owlstack-instagram',
-            'owlstack_page_owlstack-linkedin',
-            'owlstack_page_owlstack-discord',
-            'owlstack_page_owlstack-pinterest',
-            'owlstack_page_owlstack-reddit',
-            'owlstack_page_owlstack-slack',
-            'owlstack_page_owlstack-tumblr',
-            'owlstack_page_owlstack-whatsapp',
+        $fopostSocialPages = [
+            'toplevel_page_fopost-social',
+            'fopost-social_page_fopost-social-logs',
+            'fopost-social_page_fopost-social-telegram',
+            'fopost-social_page_fopost-social-twitter',
+            'fopost-social_page_fopost-social-facebook',
+            'fopost-social_page_fopost-social-instagram',
+            'fopost-social_page_fopost-social-linkedin',
+            'fopost-social_page_fopost-social-discord',
+            'fopost-social_page_fopost-social-pinterest',
+            'fopost-social_page_fopost-social-reddit',
+            'fopost-social_page_fopost-social-slack',
+            'fopost-social_page_fopost-social-tumblr',
+            'fopost-social_page_fopost-social-whatsapp',
         ];
 
         // Also load on post edit screens for the meta box.
         $postPages = ['post.php', 'post-new.php'];
 
-        if (! in_array($hook, array_merge($owlstackPages, $postPages), true)) {
+        if (! in_array($hook, array_merge($fopostSocialPages, $postPages), true)) {
             return;
         }
 
         wp_enqueue_style(
-            'owlstack-admin',
-            OWLSTACK_URL . 'assets/css/admin.css',
+            'fopost-social-admin',
+            FOPOST_SOCIAL_URL . 'assets/css/admin.css',
             [],
-            OWLSTACK_VERSION,
+            FOPOST_SOCIAL_VERSION,
         );
 
         wp_enqueue_script(
-            'owlstack-admin',
-            OWLSTACK_URL . 'assets/js/admin.js',
+            'fopost-social-admin',
+            FOPOST_SOCIAL_URL . 'assets/js/admin.js',
             ['jquery'],
-            OWLSTACK_VERSION,
+            FOPOST_SOCIAL_VERSION,
             true,
         );
 
-        wp_localize_script('owlstack-admin', 'owlstackAdmin', [
-            'restUrl' => rest_url('owlstack/v1/'),
+        wp_localize_script('fopost-social-admin', 'fopostSocialAdmin', [
+            'restUrl' => rest_url('fopost-social/v1/'),
             'nonce'   => wp_create_nonce('wp_rest'),
             'i18n'    => [
-                'connectionFailed'    => __('Connection test failed. Please check your credentials.', 'owlstack'),
-                'testMessageFailed'   => __('Failed to send test message. Please check your credentials.', 'owlstack'),
-                'noPlatformsSelected' => __('Please select at least one platform.', 'owlstack'),
-                'viewPost'            => __('View Post', 'owlstack'),
-                'publishFailed'       => __('Publishing failed. Please try again.', 'owlstack'),
-                'unknownError'        => __('An unknown error occurred.', 'owlstack'),
+                'connectionFailed'    => __('Connection test failed. Please check your credentials.', 'fopost-social'),
+                'testMessageFailed'   => __('Failed to send test message. Please check your credentials.', 'fopost-social'),
+                'noPlatformsSelected' => __('Please select at least one platform.', 'fopost-social'),
+                'viewPost'            => __('View Post', 'fopost-social'),
+                'publishFailed'       => __('Publishing failed. Please try again.', 'fopost-social'),
+                'unknownError'        => __('An unknown error occurred.', 'fopost-social'),
             ],
         ]);
     }

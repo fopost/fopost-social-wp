@@ -9,7 +9,7 @@ permissions:
   contents: write      # Required to create GitHub Releases
 
 env:
-  PLUGIN_SLUG: owlstack
+  PLUGIN_SLUG: fopost-social
 
 jobs:
   build:
@@ -68,4 +68,4 @@ jobs:
   #       env:
   #         SVN_USERNAME: ${{ secrets.WP_ORG_SVN_USERNAME }}
   #         SVN_PASSWORD: ${{ secrets.WP_ORG_SVN_PASSWORD }}
-  #         SLUG: owlstack
+  #         SLUG: fopost-social

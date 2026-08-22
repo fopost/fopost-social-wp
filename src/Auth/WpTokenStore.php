@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Auth;
+namespace Fopost\Social\Wp\Auth;
 
 defined( 'ABSPATH' ) || exit;
 
 use DateTimeImmutable;
-use Owlstack\Core\Auth\AccessToken;
-use Owlstack\Core\Auth\Contracts\TokenStoreInterface;
+use Fopost\Social\Auth\AccessToken;
+use Fopost\Social\Auth\Contracts\TokenStoreInterface;
 
 /**
  * WordPress wp_options-based token storage with encryption.
@@ -17,7 +17,7 @@ use Owlstack\Core\Auth\Contracts\TokenStoreInterface;
  */
 class WpTokenStore implements TokenStoreInterface
 {
-    private const OPTION_PREFIX = 'owlstack_token_';
+    private const OPTION_PREFIX = 'fopost_social_token_';
 
     public function get(string $platform, string $accountId): ?AccessToken
     {
@@ -91,7 +91,7 @@ class WpTokenStore implements TokenStoreInterface
         if ($encrypted === false) {
             wp_trigger_error(
                 __METHOD__,
-                '[Owlstack] OpenSSL encryption failed. Storing token with base64 encoding only. Install the OpenSSL PHP extension for proper encryption.',
+                '[FoPost Social] OpenSSL encryption failed. Storing token with base64 encoding only. Install the OpenSSL PHP extension for proper encryption.',
                 E_USER_NOTICE,
             );
 

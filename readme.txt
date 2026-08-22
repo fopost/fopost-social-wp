@@ -1,6 +1,6 @@
-=== Owlstack ===
-Contributors: alihesari
-Donate link: https://owlstack.app
+=== FoPost Social ===
+Contributors: fopost
+Donate link: https://fopost.com
 Tags: social media, auto publish, telegram, twitter, facebook
 Requires at least: 6.4
 Tested up to: 7.1
@@ -9,11 +9,11 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Publish content to Telegram, X (Twitter), Facebook, Instagram, LinkedIn, Discord, and more — directly from WordPress.
+Publish content to Telegram, X (Twitter), Facebook, Instagram, LinkedIn, Discord, and more, directly from WordPress.
 
 == Description ==
 
-Owlstack lets you automatically share your WordPress posts to social media platforms with a single click or on publish. Powered by the [Owlstack Core](https://owlstack.app) engine, it provides a seamless publishing experience.
+FoPost Social lets you automatically share your WordPress posts to social media platforms with a single click or on publish. It talks straight to each platform with your own app credentials, so no FoPost account is needed. Powered by the [FoPost Social Core](https://fopost.com) engine, it provides a seamless publishing experience.
 
 **Supported Platforms:**
 
@@ -37,30 +37,30 @@ Owlstack lets you automatically share your WordPress posts to social media platf
 * **Delivery Logs** — Track all publishing activity with status, errors, and external links
 * **REST API** — AJAX endpoints for connection testing, manual publishing, and log management
 * **WP HTTP API** — Uses native WordPress HTTP functions instead of cURL
-* **WordPress Events** — Full hook support with `owlstack_post_published` and `owlstack_post_failed` actions
+* **WordPress Events** — Full hook support with `fopost_social_post_published` and `fopost_social_post_failed` actions
 * **Token Storage** — Encrypted OAuth token storage via `wp_options`
 
 **For Developers:**
 
-Owlstack provides a simple PHP API for publishing from themes or other plugins:
+FoPost Social provides a simple PHP API for publishing from themes or other plugins:
 
     // Publish to Telegram
-    owlstack()->telegram('Hello from WordPress!');
+    fopost_social()->telegram('Hello from WordPress!');
 
     // Publish to Twitter/X
-    owlstack()->twitter('Hello from WordPress!');
+    fopost_social()->twitter('Hello from WordPress!');
 
     // Publish to a specific platform by name
-    owlstack()->publish($post, 'linkedin');
+    fopost_social()->publish($post, 'linkedin');
 
     // Publish to all configured platforms
-    owlstack()->toAll($post);
+    fopost_social()->toAll($post);
 
 == Installation ==
 
-1. Upload the `owlstack` folder to the `/wp-content/plugins/` directory, or install directly through the WordPress plugins screen.
+1. Upload the `fopost-social` folder to the `/wp-content/plugins/` directory, or install directly through the WordPress plugins screen.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to **Owlstack > Settings** to configure your platform credentials.
+3. Go to **FoPost Social > Settings** to configure your platform credentials.
 
 == Frequently Asked Questions ==
 
@@ -88,23 +88,19 @@ No. All dependencies are bundled with the plugin. Simply install and activate it
 
 = Can I customize which post types are supported? =
 
-Yes. Use the `owlstack_supported_post_types` filter:
+Yes. Use the `fopost_social_supported_post_types` filter:
 
-    add_filter('owlstack_supported_post_types', function ($types) {
+    add_filter('fopost_social_supported_post_types', function ($types) {
         return ['post', 'page', 'product'];
     });
 
 = Is there proxy support? =
 
-Yes. Configure proxy settings in **Owlstack > Settings** for servers that cannot access social media APIs directly.
+Yes. Configure proxy settings in **FoPost Social > Settings** for servers that cannot access social media APIs directly.
 
 = Where are delivery logs stored? =
 
-Delivery logs are stored in a custom database table (`wp_owlstack_delivery_logs`). You can view them under **Owlstack > Delivery Logs**.
-
-= What is the OwlStack Cloud connection? =
-
-If you use the OwlStack Cloud dashboard, you can connect it to your site without sharing a WordPress username or Application Password. Go to **Owlstack > Cloud**, generate a site token, and paste it into the OwlStack dashboard together with your site URL. The token is scoped to a minimal set of plugin endpoints: OwlStack Cloud can create posts (as the author you choose, as a draft or published based on your setting), upload images for featured media, and remove posts it created — nothing else. Only a hash of the token is stored, you can revoke it at any time, and the plugin never makes outbound calls to OwlStack Cloud. The feature is entirely optional and inactive until you generate a token.
+Delivery logs are stored in a custom database table (`wp_fopost_social_delivery_logs`). You can view them under **FoPost Social > Delivery Logs**.
 
 == Third-Party Services ==
 
@@ -185,19 +181,20 @@ This plugin connects to external third-party services to publish your content. D
 == Changelog ==
 
 = 1.1.2 =
-* Every link in the plugin now points to owlstack.app, the current OwlStack domain. The previous owlstack.dev links no longer reach the public site.
+* Renamed to FoPost Social. The plugin slug, text domain, admin menu, REST namespace, PHP namespace, hooks, options, and delivery-log table all move to the fopost-social prefix.
+* Settings, tokens, post meta, capabilities, and delivery logs saved by the previous version are copied forward automatically on activation. Nothing is deleted, so the old data stays in place.
+* Removed: the optional site-token connection that let a hosted dashboard publish into this site. That feature now lives in its own separate plugin. Publishing out to the social platforms from this site is unchanged.
+* Every link in the plugin now points to fopost.com.
 
 = 1.1.1 =
 * Tested against WordPress 7.1.
-* No functional changes. The post editor meta box, publishing, and the Cloud connection are unaffected by the 7.1 iframed editor and client-side media processing changes.
+* No functional changes. The post editor meta box and publishing are unaffected by the 7.1 iframed editor and client-side media processing changes.
 
 = 1.1.0 =
-* New: OwlStack Cloud connection (**Owlstack > Cloud**). Generate a revocable site token so the OwlStack Cloud dashboard can publish posts to this site without a WordPress username or Application Password.
+* New: hosted-dashboard connection. Generate a revocable site token so a hosted dashboard can publish posts to this site without a WordPress username or Application Password. Removed again in 1.1.2, where it moved to its own plugin.
 * New: Incoming content controls — always draft, always publish, or honor the requested status; configurable post author and post type.
-* New: REST endpoints under `owlstack/v1/cloud` for site info, post creation, image upload, and removal of Cloud-created posts. Token-authenticated; only a SHA-256 hash of the token is stored.
-* The plugin makes no outbound calls to OwlStack Cloud; the feature is inactive until a token is generated.
-* The Cloud page now sits directly after Settings in the Owlstack menu, instead of below every platform.
-* Settings gains a short, dismissible explanation of what OwlStack Cloud is and how it differs from publishing directly from this site.
+* New: REST endpoints for site info, post creation, image upload, and removal of the posts they created. Token-authenticated; only a SHA-256 hash of the token is stored. Removed again in 1.1.2.
+* Settings gains a short, dismissible card explaining how the hosted product differs from publishing directly from this site.
 
 = 1.0.1 =
 * Improved settings update feedback on the platform settings pages.
@@ -218,21 +215,21 @@ This plugin connects to external third-party services to publish your content. D
 * WordPress HTTP API integration.
 * Encrypted OAuth token storage.
 * Event system with WordPress action hooks.
-* Full developer API via `owlstack()` helper function.
+* Full developer API via `fopost_social()` helper function.
 
 == Upgrade Notice ==
 
 = 1.1.2 =
-Link fix. Documentation and site links now point to owlstack.app; the old links no longer resolve for visitors.
+Rebrand to FoPost Social. Your settings, tokens, and delivery logs are copied forward automatically and the originals are left untouched. The optional site-token connection for a hosted dashboard has moved to a separate plugin; publishing out to social platforms from this site is unchanged.
 
 = 1.1.1 =
 Compatibility release for WordPress 7.1. No functional changes, safe to update.
 
 = 1.1.0 =
-Adds an optional OwlStack Cloud connection. Generate a revocable site token under Owlstack > Cloud to let the Cloud dashboard publish to this site without a WordPress username or Application Password. Existing setups are unaffected and the feature stays inactive until you generate a token.
+Adds an optional hosted-dashboard connection. Generate a revocable site token to let a hosted dashboard publish to this site without a WordPress username or Application Password. Existing setups are unaffected and the feature stays inactive until you generate a token. Removed again in 1.1.2.
 
 = 1.0.1 =
 Maintenance release. Stronger input sanitization, clearer setup guidance, and Telegram formatting improvements.
 
 = 1.0.0 =
-Initial release. Configure your platform credentials under Owlstack > Settings after activation.
+Initial release. Configure your platform credentials under FoPost Social > Settings after activation.

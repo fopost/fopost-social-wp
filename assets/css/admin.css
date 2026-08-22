@@ -1,57 +1,57 @@
 /**
- * Owlstack WordPress Admin Styles
+ * FoPost Social WordPress Admin Styles
  *
- * @package Owlstack\WordPress
+ * @package Fopost\Social\Wp
  */
 
 /* ── Settings Page ────────────────────────────────────────────────────── */
 
-.owlstack-settings {
+.fopost-social-settings {
     max-width: 900px;
 }
 
-.owlstack-settings .form-table th {
+.fopost-social-settings .form-table th {
     width: 200px;
     padding: 15px 10px 15px 0;
 }
 
-.owlstack-settings .form-table td {
+.fopost-social-settings .form-table td {
     padding: 10px 10px;
 }
 
-.owlstack-settings .form-table input[type="text"],
-.owlstack-settings .form-table input[type="password"],
-.owlstack-settings .form-table input[type="url"],
-.owlstack-settings .form-table input[type="number"],
-.owlstack-settings .form-table select {
+.fopost-social-settings .form-table input[type="text"],
+.fopost-social-settings .form-table input[type="password"],
+.fopost-social-settings .form-table input[type="url"],
+.fopost-social-settings .form-table input[type="number"],
+.fopost-social-settings .form-table select {
     width: 100%;
     max-width: 400px;
 }
 
-.owlstack-settings h2 {
+.fopost-social-settings h2 {
     margin-top: 2em;
     padding-bottom: 0.5em;
     border-bottom: 1px solid #c3c4c7;
 }
 
-.owlstack-settings h2:first-of-type {
+.fopost-social-settings h2:first-of-type {
     margin-top: 0;
 }
 
 /* Test connection buttons */
-.owlstack-test-connection {
+.fopost-social-test-connection {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-top: 10px;
 }
 
-.owlstack-test-connection .spinner {
+.fopost-social-test-connection .spinner {
     float: none;
     margin: 0;
 }
 
-.owlstack-test-result {
+.fopost-social-test-result {
     display: inline-block;
     padding: 4px 10px;
     border-radius: 3px;
@@ -59,13 +59,13 @@
     margin-left: 8px;
 }
 
-.owlstack-test-result.success {
+.fopost-social-test-result.success {
     background: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
-.owlstack-test-result.error {
+.fopost-social-test-result.error {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
@@ -73,131 +73,131 @@
 
 /* ── Meta Box ─────────────────────────────────────────────────────────── */
 
-.owlstack-meta-box {
+.fopost-social-meta-box {
     padding: 6px 0;
 }
 
-.owlstack-meta-label {
+.fopost-social-meta-label {
     margin: 0 0 6px;
 }
 
 /* Platform list table */
-.owlstack-platform-list {
+.fopost-social-platform-list {
     width: 100%;
     border-spacing: 0;
     margin: 0 0 4px;
 }
 
-.owlstack-platform-row td {
+.fopost-social-platform-row td {
     padding: 5px 2px;
     vertical-align: middle;
     border-bottom: 1px solid #f0f0f1;
 }
 
-.owlstack-platform-row:last-child td {
+.fopost-social-platform-row:last-child td {
     border-bottom: none;
 }
 
-.owlstack-platform-checkbox-col {
+.fopost-social-platform-checkbox-col {
     width: 20px;
 }
 
-.owlstack-platform-checkbox-col input[type="checkbox"] {
+.fopost-social-platform-checkbox-col input[type="checkbox"] {
     margin: 0;
 }
 
-.owlstack-platform-name-col {
+.fopost-social-platform-name-col {
     padding-left: 4px !important;
 }
 
-.owlstack-platform-action-col {
+.fopost-social-platform-action-col {
     width: 75px;
     text-align: right;
     white-space: nowrap;
 }
 
-.owlstack-platform-action-col .spinner {
+.fopost-social-platform-action-col .spinner {
     float: none;
     margin: 0 0 0 2px;
     vertical-align: middle;
 }
 
-.owlstack-platform-action-col .button-small {
+.fopost-social-platform-action-col .button-small {
     min-height: 26px;
     line-height: 24px;
     padding: 0 8px;
     font-size: 11px;
 }
 
-.owlstack-platform-status-col {
+.fopost-social-platform-status-col {
     width: auto;
     padding-left: 4px !important;
     font-size: 12px;
 }
 
-.owlstack-platform-result.success {
+.fopost-social-platform-result.success {
     color: #00a32a;
 }
 
-.owlstack-platform-result.success a {
+.fopost-social-platform-result.success a {
     color: #00a32a;
 }
 
-.owlstack-platform-result.error {
+.fopost-social-platform-result.error {
     color: #d63638;
 }
 
 /* Auto-publish toggle */
-.owlstack-auto-publish {
+.fopost-social-auto-publish {
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-.owlstack-auto-publish input[type="checkbox"] {
+.fopost-social-auto-publish input[type="checkbox"] {
     margin: 0;
 }
 
 /* Publish All Selected button */
-.owlstack-publish-all-btn {
+.fopost-social-publish-all-btn {
     margin-top: 2px;
 }
 
-.owlstack-publish-all-spinner {
+.fopost-social-publish-all-spinner {
     float: none;
     margin: 0 0 0 4px;
     vertical-align: middle;
 }
 
-.owlstack-publish-result {
+.fopost-social-publish-result {
     margin-top: 8px;
     padding: 8px 12px;
     border-radius: 3px;
     font-size: 13px;
 }
 
-.owlstack-publish-result.success {
+.fopost-social-publish-result.success {
     background: #d4edda;
     color: #155724;
 }
 
-.owlstack-publish-result.error {
+.fopost-social-publish-result.error {
     background: #f8d7da;
     color: #721c24;
 }
 
-.owlstack-publish-result.partial {
+.fopost-social-publish-result.partial {
     background: #fff3cd;
     color: #856404;
 }
 
 /* ── Delivery Logs Page ───────────────────────────────────────────────── */
 
-.owlstack-logs-wrap .tablenav {
+.fopost-social-logs-wrap .tablenav {
     margin: 6px 0;
 }
 
-.owlstack-logs-filter {
+.fopost-social-logs-filter {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -209,13 +209,13 @@
     border-radius: 3px;
 }
 
-.owlstack-logs-filter select,
-.owlstack-logs-filter input[type="number"] {
+.fopost-social-logs-filter select,
+.fopost-social-logs-filter input[type="number"] {
     max-width: 180px;
 }
 
 /* Status badges */
-.owlstack-badge {
+.fopost-social-badge {
     display: inline-block;
     padding: 2px 8px;
     border-radius: 3px;
@@ -225,136 +225,136 @@
     text-transform: capitalize;
 }
 
-.owlstack-badge--success,
-.owlstack-badge--delivered {
+.fopost-social-badge--success,
+.fopost-social-badge--delivered {
     background: #d4edda;
     color: #155724;
 }
 
-.owlstack-badge--failed,
-.owlstack-badge--error {
+.fopost-social-badge--failed,
+.fopost-social-badge--error {
     background: #f8d7da;
     color: #721c24;
 }
 
-.owlstack-badge--pending {
+.fopost-social-badge--pending {
     background: #fff3cd;
     color: #856404;
 }
 
-.owlstack-badge--queued {
+.fopost-social-badge--queued {
     background: #d1ecf1;
     color: #0c5460;
 }
 
 /* Platform badges */
-.owlstack-badge--telegram {
+.fopost-social-badge--telegram {
     background: #e3f2fd;
     color: #0277bd;
 }
 
-.owlstack-badge--twitter {
+.fopost-social-badge--twitter {
     background: #e8f5e9;
     color: #2e7d32;
 }
 
-.owlstack-badge--facebook {
+.fopost-social-badge--facebook {
     background: #e8eaf6;
     color: #283593;
 }
 
-.owlstack-badge--instagram {
+.fopost-social-badge--instagram {
     background: #fce4ec;
     color: #c2185b;
 }
 
-.owlstack-badge--linkedin {
+.fopost-social-badge--linkedin {
     background: #e3f2fd;
     color: #0a66c2;
 }
 
-.owlstack-badge--discord {
+.fopost-social-badge--discord {
     background: #ede7f6;
     color: #5865f2;
 }
 
-.owlstack-badge--pinterest {
+.fopost-social-badge--pinterest {
     background: #fbe9e7;
     color: #e60023;
 }
 
-.owlstack-badge--reddit {
+.fopost-social-badge--reddit {
     background: #fff3e0;
     color: #ff4500;
 }
 
-.owlstack-badge--slack {
+.fopost-social-badge--slack {
     background: #e8f5e9;
     color: #4a154b;
 }
 
-.owlstack-badge--tumblr {
+.fopost-social-badge--tumblr {
     background: #e3f2fd;
     color: #001935;
 }
 
-.owlstack-badge--whatsapp {
+.fopost-social-badge--whatsapp {
     background: #e8f5e9;
     color: #25d366;
 }
 
 /* Platform overview table */
-.owlstack-platform-overview {
+.fopost-social-platform-overview {
     margin-top: 12px;
     margin-bottom: 24px;
 }
 
-.owlstack-platform-overview td {
+.fopost-social-platform-overview td {
     vertical-align: middle;
 }
 
 /* ── Test Actions Table ───────────────────────────────────────────────── */
 
-.owlstack-test-actions-table {
+.fopost-social-test-actions-table {
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-.owlstack-test-actions-table td {
+.fopost-social-test-actions-table td {
     vertical-align: middle;
 }
 
-.owlstack-test-actions-table .spinner {
+.fopost-social-test-actions-table .spinner {
     float: none;
     margin: 0 0 0 4px;
     vertical-align: middle;
 }
 
-.owlstack-test-col-type {
+.fopost-social-test-col-type {
     width: 140px;
 }
 
-.owlstack-test-col-action {
+.fopost-social-test-col-action {
     width: 180px;
 }
 
-.owlstack-test-col-desc {
+.fopost-social-test-col-desc {
     width: auto;
 }
 
-.owlstack-test-steps {
+.fopost-social-test-steps {
     margin: 6px 0 0 16px;
     padding: 0;
     font-size: 13px;
     line-height: 1.6;
 }
 
-.owlstack-test-steps li {
+.fopost-social-test-steps li {
     margin-bottom: 4px;
 }
 
 /* Log details */
-.owlstack-log-error {
+.fopost-social-log-error {
     color: #721c24;
     font-style: italic;
     max-width: 300px;
@@ -363,13 +363,13 @@
     white-space: nowrap;
 }
 
-.owlstack-log-external-link {
+.fopost-social-log-external-link {
     word-break: break-all;
 }
 
 /* ── Support Section ──────────────────────────────────────────────────── */
 
-.owlstack-support-section {
+.fopost-social-support-section {
     margin-top: 2em;
     padding: 16px 20px;
     background: #f0f6fc;
@@ -378,75 +378,75 @@
     border-radius: 3px;
 }
 
-.owlstack-support-section h2 {
+.fopost-social-support-section h2 {
     margin-top: 0;
     border-bottom: none;
     padding-bottom: 0;
     color: #1d2327;
 }
 
-.owlstack-support-section p {
+.fopost-social-support-section p {
     font-size: 14px;
     line-height: 1.6;
     color: #3c434a;
     margin: 0;
 }
 
-.owlstack-support-section a {
+.fopost-social-support-section a {
     color: #2271b1;
     text-decoration: underline;
     font-weight: 600;
 }
 
-.owlstack-support-section a:hover {
+.fopost-social-support-section a:hover {
     color: #135e96;
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
 @media screen and (max-width: 782px) {
-    .owlstack-settings .form-table input[type="text"],
-    .owlstack-settings .form-table input[type="password"],
-    .owlstack-settings .form-table input[type="url"],
-    .owlstack-settings .form-table input[type="number"],
-    .owlstack-settings .form-table select {
+    .fopost-social-settings .form-table input[type="text"],
+    .fopost-social-settings .form-table input[type="password"],
+    .fopost-social-settings .form-table input[type="url"],
+    .fopost-social-settings .form-table input[type="number"],
+    .fopost-social-settings .form-table select {
         max-width: 100%;
     }
 
-    .owlstack-logs-filter {
+    .fopost-social-logs-filter {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .owlstack-logs-filter select,
-    .owlstack-logs-filter input[type="number"] {
+    .fopost-social-logs-filter select,
+    .fopost-social-logs-filter input[type="number"] {
         max-width: 100%;
     }
 }
 
 /* Cloud promo card */
-.owlstack-cloud-promo {
+.fopost-social-cloud-promo {
     padding: 12px 16px;
     margin: 20px 0;
     border-left-width: 4px;
 }
 
-.owlstack-cloud-promo__title {
+.fopost-social-cloud-promo__title {
     margin: 0 0 8px;
     font-size: 15px;
     line-height: 1.4;
 }
 
-.owlstack-cloud-promo p {
+.fopost-social-cloud-promo p {
     max-width: 46em;
 }
 
-.owlstack-cloud-promo__dismiss {
+.fopost-social-cloud-promo__dismiss {
     margin-left: 12px;
     color: #646970;
     text-decoration: none;
 }
 
-.owlstack-cloud-promo__dismiss:hover {
+.fopost-social-cloud-promo__dismiss:hover {
     color: #135e96;
 }

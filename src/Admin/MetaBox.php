@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Admin;
+namespace Fopost\Social\Wp\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\WordPress\Plugin;
+use Fopost\Social\Wp\Plugin;
 use WP_Post;
 
 /**
- * Registers the Owlstack publish meta box on post edit screens.
+ * Registers the FoPost Social publish meta box on post edit screens.
  */
 class MetaBox
 {
-    private const NONCE_ACTION = 'owlstack_meta_box';
-    private const NONCE_FIELD = 'owlstack_meta_box_nonce';
-    private const META_PLATFORMS = '_owlstack_platforms';
-    private const META_AUTO_PUBLISH = '_owlstack_auto_publish';
+    private const NONCE_ACTION = 'fopost_social_meta_box';
+    private const NONCE_FIELD = 'fopost_social_meta_box_nonce';
+    private const META_PLATFORMS = '_fopost_social_platforms';
+    private const META_AUTO_PUBLISH = '_fopost_social_auto_publish';
 
     /**
      * Register the meta box on supported post types.
@@ -25,12 +25,12 @@ class MetaBox
     public function register(): void
     {
         /** @var string[] $postTypes */
-        $postTypes = apply_filters('owlstack_supported_post_types', ['post']);
+        $postTypes = apply_filters('fopost_social_supported_post_types', ['post']);
 
         foreach ($postTypes as $postType) {
             add_meta_box(
-                id: 'owlstack-publish',
-                title: __('Owlstack — Publish to Social Media', 'owlstack'),
+                id: 'fopost-social-publish',
+                title: __('FoPost Social: Publish to Social Media', 'fopost-social'),
                 callback: [$this, 'render'],
                 screen: $postType,
                 context: 'side',
@@ -79,14 +79,14 @@ class MetaBox
         }
 
         // Save selected platforms.
-        $platforms = isset($_POST['owlstack_platforms']) && is_array($_POST['owlstack_platforms'])
-            ? array_map('sanitize_key', wp_unslash($_POST['owlstack_platforms']))
+        $platforms = isset($_POST['fopost_social_platforms']) && is_array($_POST['fopost_social_platforms'])
+            ? array_map('sanitize_key', wp_unslash($_POST['fopost_social_platforms']))
             : [];
 
         update_post_meta($postId, self::META_PLATFORMS, $platforms);
 
         // Save auto-publish toggle.
-        $autoPublish = isset($_POST['owlstack_auto_publish']) ? '1' : '';
+        $autoPublish = isset($_POST['fopost_social_auto_publish']) ? '1' : '';
         update_post_meta($postId, self::META_AUTO_PUBLISH, $autoPublish);
     }
 

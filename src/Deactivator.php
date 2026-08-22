@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress;
+namespace Fopost\Social\Wp;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ class Deactivator
      */
     private static function clearScheduledEvents(): void
     {
-        wp_clear_scheduled_hook('owlstack_scheduled_publish');
+        wp_clear_scheduled_hook('fopost_social_scheduled_publish');
     }
 
     /**
@@ -41,8 +41,8 @@ class Deactivator
             return;
         }
 
-        $role->remove_cap('manage_owlstack');
-        $role->remove_cap('owlstack_publish');
-        $role->remove_cap('owlstack_view_logs');
+        $role->remove_cap('manage_fopost_social');
+        $role->remove_cap('fopost_social_publish');
+        $role->remove_cap('fopost_social_view_logs');
     }
 }

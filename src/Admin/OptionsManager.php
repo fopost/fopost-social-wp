@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Admin;
+namespace Fopost\Social\Wp\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Config\OwlstackConfig;
+use Fopost\Social\Config\FopostConfig;
 
 /**
- * Manages Owlstack plugin settings stored in wp_options.
+ * Manages FoPost Social plugin settings stored in wp_options.
  *
- * Provides a bridge between WordPress options and OwlstackConfig.
+ * Provides a bridge between WordPress options and FopostConfig.
  */
 class OptionsManager
 {
-    private const OPTION_KEY = 'owlstack_settings';
+    private const OPTION_KEY = 'fopost_social_settings';
 
     /**
-     * Build a OwlstackConfig from stored WordPress options.
+     * Build a FopostConfig from stored WordPress options.
      */
-    public function buildConfig(): OwlstackConfig
+    public function buildConfig(): FopostConfig
     {
         $settings = $this->all();
         $platforms = $settings['platforms'] ?? [];
@@ -33,7 +33,7 @@ class OptionsManager
             }
         }
 
-        return new OwlstackConfig(
+        return new FopostConfig(
             platforms: $configured,
             options: [
                 'proxy' => $settings['proxy'] ?? [],

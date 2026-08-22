@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress;
+namespace Fopost\Social\Wp;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\WordPress\Database\DeliveryLogTable;
+use Fopost\Social\Wp\Database\DeliveryLogTable;
 
 /**
  * Handles plugin activation tasks.
@@ -20,6 +20,7 @@ class Activator
     {
         self::checkRequirements();
         self::createTables();
+        LegacyDataMigrator::run();
         self::setDefaultOptions();
         self::addCapabilities();
 
@@ -32,9 +33,9 @@ class Activator
     private static function checkRequirements(): void
     {
         if (! extension_loaded('openssl')) {
-            set_transient('owlstack_activation_notice', [
+            set_transient('fopost_social_activation_notice', [
                 'type'    => 'warning',
-                'message' => __('Owlstack: The OpenSSL PHP extension is not installed. OAuth tokens will be stored with base64 encoding only (not encrypted). Install the OpenSSL extension for production use.', 'owlstack'),
+                'message' => __('FoPost Social: The OpenSSL PHP extension is not installed. OAuth tokens will be stored with base64 encoding only (not encrypted). Install the OpenSSL extension for production use.', 'fopost-social'),
             ], 60);
         }
     }
@@ -52,7 +53,7 @@ class Activator
      */
     private static function setDefaultOptions(): void
     {
-        if (get_option('owlstack_settings') === false) {
+        if (get_option('fopost_social_settings') === false) {
             $defaults = [
                 'platforms' => [
                     'telegram' => [
@@ -85,11 +86,11 @@ class Activator
                 ],
             ];
 
-            add_option('owlstack_settings', $defaults);
+            add_option('fopost_social_settings', $defaults);
         }
 
-        if (get_option('owlstack_db_version') === false) {
-            add_option('owlstack_db_version', '1.0.0');
+        if (get_option('fopost_social_db_version') === false) {
+            add_option('fopost_social_db_version', '1.0.0');
         }
     }
 
@@ -104,8 +105,8 @@ class Activator
             return;
         }
 
-        $role->add_cap('manage_owlstack');
-        $role->add_cap('owlstack_publish');
-        $role->add_cap('owlstack_view_logs');
+        $role->add_cap('manage_fopost_social');
+        $role->add_cap('fopost_social_publish');
+        $role->add_cap('fopost_social_view_logs');
     }
 }

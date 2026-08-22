@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Admin;
+namespace Fopost\Social\Wp\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registers the Owlstack admin settings page and per-platform sub-pages.
+ * Registers the FoPost Social admin settings page and per-platform sub-pages.
  */
 class SettingsPage
 {
@@ -20,7 +20,7 @@ class SettingsPage
         'telegram' => [
             'label'       => 'Telegram',
             'description' => 'Configure your Telegram Bot API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/telegram',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/telegram',
             'fields'      => [
                 'api_token'         => ['label' => 'Bot API Token', 'secret' => true],
                 'bot_username'      => ['label' => 'Bot Username', 'placeholder' => '@YourBot', 'hint' => 'Must start with @'],
@@ -32,7 +32,7 @@ class SettingsPage
         'twitter' => [
             'label'       => 'Twitter / X',
             'description' => 'Configure your Twitter (X) API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/twitter',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/twitter',
             'fields'      => [
                 'consumer_key'        => ['label' => 'Consumer Key (API Key)', 'secret' => true],
                 'consumer_secret'     => ['label' => 'Consumer Secret', 'secret' => true],
@@ -43,7 +43,7 @@ class SettingsPage
         'facebook' => [
             'label'       => 'Facebook',
             'description' => 'Configure your Facebook Page API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/facebook',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/facebook',
             'fields'      => [
                 'app_id'                => ['label' => 'App ID', 'secret' => true],
                 'app_secret'            => ['label' => 'App Secret', 'secret' => true],
@@ -55,7 +55,7 @@ class SettingsPage
         'instagram' => [
             'label'       => 'Instagram',
             'description' => 'Configure your Instagram API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/instagram',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/instagram',
             'fields'      => [
                 'access_token'         => ['label' => 'Access Token', 'secret' => true],
                 'instagram_account_id' => ['label' => 'Instagram Account ID'],
@@ -64,7 +64,7 @@ class SettingsPage
         'linkedin' => [
             'label'       => 'LinkedIn',
             'description' => 'Configure your LinkedIn API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/linkedin',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/linkedin',
             'fields'      => [
                 'access_token'    => ['label' => 'Access Token', 'secret' => true],
                 'person_id'       => ['label' => 'Person ID', 'hint' => 'For personal profiles'],
@@ -74,7 +74,7 @@ class SettingsPage
         'discord' => [
             'label'       => 'Discord',
             'description' => 'Configure your Discord credentials. Use either a webhook URL or bot token with channel ID.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/discord',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/discord',
             'fields'      => [
                 'webhook_url' => ['label' => 'Webhook URL', 'hint' => 'For webhook mode'],
                 'bot_token'   => ['label' => 'Bot Token', 'secret' => true, 'hint' => 'For bot mode'],
@@ -84,7 +84,7 @@ class SettingsPage
         'pinterest' => [
             'label'       => 'Pinterest',
             'description' => 'Configure your Pinterest API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/pinterest',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/pinterest',
             'fields'      => [
                 'access_token' => ['label' => 'Access Token', 'secret' => true],
                 'board_id'     => ['label' => 'Board ID'],
@@ -93,7 +93,7 @@ class SettingsPage
         'reddit' => [
             'label'       => 'Reddit',
             'description' => 'Configure your Reddit API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/reddit',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/reddit',
             'fields'      => [
                 'access_token' => ['label' => 'Access Token', 'secret' => true],
                 'subreddit'    => ['label' => 'Subreddit'],
@@ -103,7 +103,7 @@ class SettingsPage
         'slack' => [
             'label'       => 'Slack',
             'description' => 'Configure your Slack credentials. Use either a bot token with channel or webhook URL.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/slack',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/slack',
             'fields'      => [
                 'bot_token'   => ['label' => 'Bot Token', 'secret' => true, 'hint' => 'For bot mode'],
                 'channel'     => ['label' => 'Channel', 'hint' => 'Required for bot mode (e.g., #general)'],
@@ -113,7 +113,7 @@ class SettingsPage
         'tumblr' => [
             'label'       => 'Tumblr',
             'description' => 'Configure your Tumblr API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/tumblr',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/tumblr',
             'fields'      => [
                 'access_token'    => ['label' => 'Access Token', 'secret' => true],
                 'blog_identifier' => ['label' => 'Blog Identifier'],
@@ -122,7 +122,7 @@ class SettingsPage
         'whatsapp' => [
             'label'       => 'WhatsApp',
             'description' => 'Configure your WhatsApp Business API credentials.',
-            'docs_url'    => 'https://owlstack.app/docs/developers/platforms/whatsapp',
+            'docs_url'    => 'https://fopost.com/docs/developers/platforms/whatsapp',
             'fields'      => [
                 'access_token'    => ['label' => 'Access Token', 'secret' => true],
                 'phone_number_id' => ['label' => 'Phone Number ID'],
@@ -151,35 +151,35 @@ class SettingsPage
     public function register(): void
     {
         add_menu_page(
-            page_title: __('Owlstack', 'owlstack'),
-            menu_title: __('Owlstack', 'owlstack'),
+            page_title: __('FoPost Social', 'fopost-social'),
+            menu_title: __('FoPost Social', 'fopost-social'),
             capability: 'manage_options',
-            menu_slug: 'owlstack',
+            menu_slug: 'fopost-social',
             callback: [$this, 'renderSettings'],
             icon_url: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iLTIuNSAtMC4yNSAxNSAxNSI+PGcgZmlsbD0iI2E3YWFhZCIgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBkPSJNOC44IDUuNHYuMmwuMS42di42bC0uMyAxLjQtLjQuNVY5SDhMOCA5bC0uMS4xaC0uMXYuMWwtLjIuMS0uMS4xLS4zLjItLjIuMS0uNi4ySDQuOGwtLjcuMS0uMy4yLS4yLjItLjIuMS0uMi4xLS4xLjEtLjEuMS0uMi4xLS4xLjEtLjIuMS4xLS4xLjEtLjEuMS0uMi4xLS4xLjEtLjJoLjF2LS4xbC4xLS4yVjEwaC4xdi0uMmwuMS0uMXYtLjRoLjFWNy45bC0uMi0uN1Y3TDMgNi45di0uMmwtLjItLjItLjItLjJ2LS4xaC0uMS44TDQgNmwuMy0uMmguMVY2bC4yLjN2LjFsLjIuNFY3TDUgN2wuMS0uMnYtLjFsLjItLjMuMi0uNmguMUw2IDZsLjguM2guNmwuMy0uMS4zLS4xLjItLjEuMi0uMXpNMCAwaDIuMmwuMS4xdi4xaC4xdi4xaC4xdi4xbC4xLjFoLjF2LjFsLjIuMXYuMUwzIDFsLjIuMnYuMWguMXYuMWwuMi4yaC4xdi4xbC4yLjJINFYyTDQgMmwuMS4xLjMuM3YtLjJMNCAydi0uMUw0IDEuNmwtLjEtLjEtLjItLjQtLjItLjJoM2wtLjEuMXYuMWwtLjIuMXYuM2wtLjIuMXYuMmwtLjQuNmguMXYtLjFsLjEtLjFMNiAydi0uMWguMWwuMS0uMmguMWwuMS0uMmguMXYtLjFoLjF2LS4xaC4xVjFIN1YxTDcgLjhWLjdoLjFsLjEtLjEuMS0uMVYuNGwuMi0uMmguMVYuMWwuMS0uMUgxMGgtLjFsLS4yLjItLjIuMS0uNS40aC0uMWwtLjcuNkg4bC0uMS4yaC0uMXYuMWgtLjFsLS4yLjFWMmgtLjFsLS41LjUtLjIuMS0uMi4xLS4yLjItLjMuM0g2bC0uMi4yLS4yLjItLjMuMmgtLjFMNSA0aC0uMWwtLjEtLjJoLS4xbC0uMS0uMS0uMS0uMWgtLjF2LS4xTDMuNyAzbC0uMS0uMS0uNS0uNC0uMy0uM2gtLjJWMmgtLjFWMkwyIDEuNkgybC0uMS0uMS0uNS0uNC0uMi0uMkwuOC42LjUuNS41LjMuMy4yLjEgMHoiLz48cGF0aCBkPSJtMSA1LjYuMi4xIDEgLjZ2LjFsLjEuMS4xLjEuMS4yaC4xbC4xLjMuMi40QTMgMyAwIDAgMSAzIDkuNHYuMmwtLjEuMXYuMWwtLjEuMS0uMS4yLS4yLjMtLjEuMmgtLjF2LjFoLS4xdi4xSDJ2LjFIMmwtLjIuMi0uOC41di02TTUgMTMuOEg4bC4yLjIuMi4yLjEuMXYuMWguMWwuMS4xLjEuMXYuMUg5di4xbC4xLjF2LjFIMWwuMS0uMS4xLS4xLjItLjJ2LS4xbC4yLS4xLjEtLjEuMi0uMi4xLS4ySDJsLjEtLjFINU00LjQgMTIuMUg4di4yaC4xdi4xaC4xbC4xLjEuMS4xLjEuMS4yLjJ2LjFoLjF2LjFsLjIuMXYuMWguMUgxdi0uMWguMVYxM2guMVYxM2guMXYtLjFoLjF2LS4xaC4xbC4xLS4yaC4xdi0uMWwuMi0uMXYtLjFsLjEtLjFoMi40TTUuMiAxMC41SDh2LjFoLjF2LjFoLjF2LjFoLjF2LjFoLjF2LjFoLjF2LjFoLjF2LjFoLjF2LjFoLjF2LjFIOXYuMUg5di4xaC4xLTYuNS4xbC4yLS4ySDNsLjItLjJoLjFsLjEtLjEuMS0uMS4yLS4xLjEtLjFINHYtLjFsLjMtLjJoMU0xLjUgMS44aC4xTDIgMmwuMi4yLS4yLjItLjEuMS0uMi40di43bC40LjkuMS4xLjIuMWguMXYuMWwuNy4yaC4ybC43LS4zLjEuMS4yLjUtMSAuNEgzcS0uNSAwLS44LS4zSDJsLS4yLS4xLS40LS40LS4xLS4yLS4xLS4xLS4yLS40LS4xLTF2LS41SDF2LS4ybC4yLS4yVjJsLjEtLjF2LS4xek04LjUgMS44bC4yLjIuMi40di4xbC4xLjIuMS41LS4xIDF2LjFsLS40LjYtLjEuMXYuMWgtLjFsLS41LjN2LjFoLS4xbC0uNi4yaC0uNGwtLjktLjItLjEtLjFoLS4xVjVsLjItLjN2LS4xaC4ybC42LjNIN3EuNCAwIDEtLjRsLjEtLjF2LS4xaC4xdi0uMXEuMy0uNC4zLS43VjNsLS4xLS41LS4xLS4xLS4zLS4zSDhWMmwuMi0uMS4xLS4xeiIvPjxwYXRoIGQ9Im0yLjQgMi41LjQuMy0uMi4zdi4yaC0uMXYuM2wuMi4yLjMuMmguNHYtLjFsLjMtLjRoLjFsLjIuMi4xLjFWNGwtLjIuMnYuMWgtLjFsLS4yLjJoLS4xYTEgMSAwIDAgMS0uOSAwTDIuMiA0IDIuMiA0IDIgMy41cTAtLjQuMi0uN2wuMS0uMnpNNy42IDIuNWwuMi4yLjIuNXYuNmgtLjFsLS4yLjMtLjEuMmgtLjFsLS4yLjFoLS44bC0uMy0uMi0uMy0uNC4zLS4yLjEtLjEuMi4zLjMuMmguM2wuMi0uMmguMXYtLjFsLjEtLjRWM2wtLjMtLjNoLjF2LS4xbC4yLS4yTTQuNSA0LjFsLjEuMWguMWwuMy4zLjMtLjNoLjN2LjFsLS4yLjQtLjEuNC0uMS4ydi4xbC0uMS4xdi4ySDV2LS4xbC0uMS0uMXYtLjFsLS4yLS4zVjVsLS4xLS4zLS4yLS4zdi0uMnpNOCAxMC42ek0uMi4yIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgxMHYxNUgweiIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPg==',
             position: 80,
         );
 
         add_submenu_page(
-            parent_slug: 'owlstack',
-            page_title: __('Settings', 'owlstack'),
-            menu_title: __('Settings', 'owlstack'),
+            parent_slug: 'fopost-social',
+            page_title: __('Settings', 'fopost-social'),
+            menu_title: __('Settings', 'fopost-social'),
             capability: 'manage_options',
-            menu_slug: 'owlstack',
+            menu_slug: 'fopost-social',
             callback: [$this, 'renderSettings'],
         );
 
         foreach (self::PLATFORMS as $key => $platform) {
             add_submenu_page(
-                parent_slug: 'owlstack',
+                parent_slug: 'fopost-social',
                 page_title: sprintf(
                     /* translators: %s: platform name */
-                    __('%s Settings', 'owlstack'),
+                    __('%s Settings', 'fopost-social'),
                     $platform['label'],
                 ),
                 menu_title: $platform['label'],
                 capability: 'manage_options',
-                menu_slug: "owlstack-{$key}",
+                menu_slug: "fopost-social-{$key}",
                 callback: fn () => $this->renderPlatform($key),
             );
         }
@@ -191,8 +191,8 @@ class SettingsPage
     public function registerSettings(): void
     {
         register_setting(
-            'owlstack_settings_group',
-            'owlstack_settings',
+            'fopost_social_settings_group',
+            'fopost_social_settings',
             [
                 'type'              => 'array',
                 // Custom callback needed for array-type settings.
@@ -203,22 +203,22 @@ class SettingsPage
 
         // ── Proxy section on main settings page ──────────────────────────
         add_settings_section(
-            'owlstack_proxy',
-            __('Proxy', 'owlstack'),
-            fn () => printf('<p>%s</p>', esc_html__('Configure a proxy for servers that cannot access social networks directly.', 'owlstack')),
-            'owlstack',
+            'fopost_social_proxy',
+            __('Proxy', 'fopost-social'),
+            fn () => printf('<p>%s</p>', esc_html__('Configure a proxy for servers that cannot access social networks directly.', 'fopost-social')),
+            'fopost-social',
         );
 
-        $this->addProxyField('type', __('Proxy Type', 'owlstack'));
-        $this->addProxyField('hostname', __('Hostname', 'owlstack'));
-        $this->addProxyField('port', __('Port', 'owlstack'));
-        $this->addProxyField('username', __('Username', 'owlstack'));
-        $this->addProxyField('password', __('Password', 'owlstack'), true);
+        $this->addProxyField('type', __('Proxy Type', 'fopost-social'));
+        $this->addProxyField('hostname', __('Hostname', 'fopost-social'));
+        $this->addProxyField('port', __('Port', 'fopost-social'));
+        $this->addProxyField('username', __('Username', 'fopost-social'));
+        $this->addProxyField('password', __('Password', 'fopost-social'), true);
 
         // ── Per-platform sections ────────────────────────────────────────
         foreach (self::PLATFORMS as $platformKey => $platform) {
-            $pageSlug  = "owlstack-{$platformKey}";
-            $sectionId = "owlstack_{$platformKey}_section";
+            $pageSlug  = "fopost-social-{$platformKey}";
+            $sectionId = "fopost_social_{$platformKey}_section";
 
             add_settings_section(
                 $sectionId,
@@ -285,13 +285,13 @@ class SettingsPage
         string $key,
         string $label,
         bool $isSecret = false,
-        string $page = 'owlstack',
+        string $page = 'fopost-social',
         string $section = '',
         ?string $hint = null,
         ?string $placeholder = null,
     ): void {
-        $fieldId   = "owlstack_{$platform}_{$key}";
-        $sectionId = $section !== '' ? $section : "owlstack_{$platform}";
+        $fieldId   = "fopost_social_{$platform}_{$key}";
+        $sectionId = $section !== '' ? $section : "fopost_social_{$platform}";
 
         add_settings_field(
             $fieldId,
@@ -300,7 +300,7 @@ class SettingsPage
                 $value = $this->optionsManager->get("platforms.{$platform}.{$key}", '');
                 $type  = $isSecret ? 'password' : 'text';
                 printf(
-                    '<input type="%s" id="%s" name="owlstack_settings[platforms][%s][%s]" value="%s" class="regular-text" autocomplete="off" placeholder="%s" />',
+                    '<input type="%s" id="%s" name="fopost_social_settings[platforms][%s][%s]" value="%s" class="regular-text" autocomplete="off" placeholder="%s" />',
                     esc_attr($type),
                     esc_attr($fieldId),
                     esc_attr($platform),
@@ -322,18 +322,18 @@ class SettingsPage
         string $key,
         string $label,
         array $options,
-        string $page = 'owlstack',
+        string $page = 'fopost-social',
         string $section = '',
     ): void {
-        $fieldId   = "owlstack_{$platform}_{$key}";
-        $sectionId = $section !== '' ? $section : "owlstack_{$platform}";
+        $fieldId   = "fopost_social_{$platform}_{$key}";
+        $sectionId = $section !== '' ? $section : "fopost_social_{$platform}";
 
         add_settings_field(
             $fieldId,
             $label,
             function () use ($platform, $key, $fieldId, $options): void {
                 $value = $this->optionsManager->get("platforms.{$platform}.{$key}", '');
-                printf('<select id="%s" name="owlstack_settings[platforms][%s][%s]">', esc_attr($fieldId), esc_attr($platform), esc_attr($key));
+                printf('<select id="%s" name="fopost_social_settings[platforms][%s][%s]">', esc_attr($fieldId), esc_attr($platform), esc_attr($key));
                 foreach ($options as $option) {
                     printf(
                         '<option value="%s" %s>%s</option>',
@@ -351,7 +351,7 @@ class SettingsPage
 
     private function addProxyField(string $key, string $label, bool $isSecret = false): void
     {
-        $fieldId = "owlstack_proxy_{$key}";
+        $fieldId = "fopost_social_proxy_{$key}";
 
         add_settings_field(
             $fieldId,
@@ -360,15 +360,15 @@ class SettingsPage
                 $value = $this->optionsManager->get("proxy.{$key}", '');
                 $type  = $isSecret ? 'password' : 'text';
                 printf(
-                    '<input type="%s" id="%s" name="owlstack_settings[proxy][%s]" value="%s" class="regular-text" autocomplete="off" />',
+                    '<input type="%s" id="%s" name="fopost_social_settings[proxy][%s]" value="%s" class="regular-text" autocomplete="off" />',
                     esc_attr($type),
                     esc_attr($fieldId),
                     esc_attr($key),
                     esc_attr((string) $value),
                 );
             },
-            'owlstack',
-            'owlstack_proxy',
+            'fopost-social',
+            'fopost_social_proxy',
         );
     }
 }

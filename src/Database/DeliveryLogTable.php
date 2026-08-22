@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Database;
+namespace Fopost\Social\Wp\Database;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class DeliveryLogTable
 {
-    public const TABLE_NAME = 'owlstack_delivery_logs';
+    public const TABLE_NAME = 'fopost_social_delivery_logs';
 
     /**
      * Create the delivery logs table using dbDelta().

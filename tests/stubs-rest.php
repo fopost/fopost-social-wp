@@ -4,18 +4,17 @@
 // phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound -- Grouped WP core class stubs.
 
 /**
- * WordPress REST + post function stubs for unit testing the Cloud endpoints.
+ * WordPress REST + post function stubs for unit testing.
  *
  * Loaded by tests/bootstrap.php. Each stub is only defined when the real
  * WordPress implementation is absent. In-memory post/meta stores live in
  * $GLOBALS so tests can reset and inspect them.
  *
- * @package Owlstack\WordPress\Tests
+ * @package Fopost\Social\Wp\Tests
  */
 
-$GLOBALS['owlstack_test_posts'] = [];
-$GLOBALS['owlstack_test_meta']  = [];
-$GLOBALS['owlstack_test_users'] = [1];
+$GLOBALS['fopost_social_test_posts'] = [];
+$GLOBALS['fopost_social_test_meta']  = [];
 
 if (! class_exists('WP_Error')) {
     class WP_Error
@@ -147,96 +146,31 @@ if (! function_exists('register_rest_route')) {
     }
 }
 
-if (! function_exists('get_userdata')) {
-    function get_userdata(int $userId): object|false
-    {
-        return in_array($userId, $GLOBALS['owlstack_test_users'], true)
-            ? (object) ['ID' => $userId]
-            : false;
-    }
-}
-
-if (! function_exists('post_type_exists')) {
-    function post_type_exists(string $postType): bool
-    {
-        return in_array($postType, ['post', 'page'], true);
-    }
-}
-
-if (! function_exists('wp_kses_post')) {
-    function wp_kses_post(string $content): string
-    {
-        // Minimal mimic: strip script/style blocks and event-handler attributes.
-        $content = preg_replace('#<(script|style)\b[^>]*>.*?</\1>#si', '', $content) ?? '';
-
-        return preg_replace('#\son\w+="[^"]*"#i', '', $content) ?? '';
-    }
-}
-
-if (! function_exists('wp_slash')) {
-    function wp_slash(mixed $value): mixed
-    {
-        return $value;
-    }
-}
-
-if (! function_exists('wp_insert_post')) {
-    function wp_insert_post(array $postarr, bool $wpError = false): int|WP_Error
-    {
-        static $nextId = 100;
-
-        $id = $nextId++;
-
-        $GLOBALS['owlstack_test_posts'][$id] = new WP_Post([
-            'ID'          => $id,
-            'post_status' => $postarr['post_status'] ?? 'draft',
-            'post_type'   => $postarr['post_type'] ?? 'post',
-            'post_title'  => $postarr['post_title'] ?? '',
-        ]);
-        $GLOBALS['owlstack_test_posts'][$id]->post_content = $postarr['post_content'] ?? '';
-
-        foreach (($postarr['meta_input'] ?? []) as $key => $value) {
-            $GLOBALS['owlstack_test_meta'][$id][$key] = $value;
-        }
-
-        return $id;
-    }
-}
-
 if (! function_exists('get_post')) {
     function get_post(int $id): ?WP_Post
     {
-        return $GLOBALS['owlstack_test_posts'][$id] ?? null;
+        return $GLOBALS['fopost_social_test_posts'][$id] ?? null;
     }
 }
 
 if (! function_exists('get_post_status')) {
     function get_post_status(int $id): string|false
     {
-        return $GLOBALS['owlstack_test_posts'][$id]->post_status ?? false;
+        return $GLOBALS['fopost_social_test_posts'][$id]->post_status ?? false;
     }
 }
 
 if (! function_exists('get_post_type')) {
     function get_post_type(int $id): string|false
     {
-        return $GLOBALS['owlstack_test_posts'][$id]->post_type ?? false;
+        return $GLOBALS['fopost_social_test_posts'][$id]->post_type ?? false;
     }
 }
 
 if (! function_exists('get_post_meta')) {
     function get_post_meta(int $id, string $key, bool $single = false): mixed
     {
-        return $GLOBALS['owlstack_test_meta'][$id][$key] ?? '';
-    }
-}
-
-if (! function_exists('set_post_thumbnail')) {
-    function set_post_thumbnail(int $postId, int $attachmentId): bool
-    {
-        $GLOBALS['owlstack_test_meta'][$postId]['_thumbnail_id'] = $attachmentId;
-
-        return true;
+        return $GLOBALS['fopost_social_test_meta'][$id][$key] ?? '';
     }
 }
 
@@ -254,34 +188,6 @@ if (! function_exists('admin_url')) {
     }
 }
 
-if (! function_exists('wp_trash_post')) {
-    function wp_trash_post(int $id): WP_Post|false
-    {
-        $post = $GLOBALS['owlstack_test_posts'][$id] ?? null;
-        if ($post === null) {
-            return false;
-        }
-
-        $post->post_status = 'trash';
-
-        return $post;
-    }
-}
-
-if (! function_exists('wp_delete_post')) {
-    function wp_delete_post(int $id, bool $force = false): WP_Post|false
-    {
-        $post = $GLOBALS['owlstack_test_posts'][$id] ?? null;
-        if ($post === null) {
-            return false;
-        }
-
-        unset($GLOBALS['owlstack_test_posts'][$id]);
-
-        return $post;
-    }
-}
-
 if (! function_exists('get_bloginfo')) {
     function get_bloginfo(string $show = ''): string
     {
@@ -296,13 +202,6 @@ if (! function_exists('home_url')) {
     }
 }
 
-if (! function_exists('get_site_icon_url')) {
-    function get_site_icon_url(): string
-    {
-        return '';
-    }
-}
-
 if (! function_exists('sanitize_textarea_field')) {
     function sanitize_textarea_field(string $str): string
     {
@@ -314,12 +213,5 @@ if (! function_exists('sanitize_title')) {
     function sanitize_title(string $title): string
     {
         return strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $title) ?? '');
-    }
-}
-
-if (! function_exists('sanitize_file_name')) {
-    function sanitize_file_name(string $filename): string
-    {
-        return preg_replace('/[^a-zA-Z0-9._-]/', '', $filename) ?? '';
     }
 }

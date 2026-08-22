@@ -8,19 +8,19 @@ if (! defined('ABSPATH')) {
     return;
 }
 
-use Owlstack\WordPress\Plugin;
-use Owlstack\WordPress\Publishing\SendTo;
+use Fopost\Social\Wp\Plugin;
+use Fopost\Social\Wp\Publishing\SendTo;
 
-if (! function_exists('owlstack')) {
+if (! function_exists('fopost_social')) {
     /**
-     * Get the Owlstack SendTo instance for publishing content.
+     * Get the FoPost SendTo instance for publishing content.
      *
      * Usage:
-     *     owlstack()->telegram('Hello!');
-     *     owlstack()->twitter('Hello!');
-     *     owlstack()->toAll($post);
+     *     fopost_social()->telegram('Hello!');
+     *     fopost_social()->twitter('Hello!');
+     *     fopost_social()->toAll($post);
      */
-    function owlstack(): SendTo
+    function fopost_social(): SendTo
     {
         return Plugin::instance()->sendTo();
     }

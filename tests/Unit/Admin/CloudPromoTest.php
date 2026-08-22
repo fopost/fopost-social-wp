@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Tests\Unit\Admin;
+namespace Fopost\Social\Wp\Tests\Unit\Admin;
 
-use Owlstack\WordPress\Admin\CloudPromo;
-use Owlstack\WordPress\Tests\TestCase;
+use Fopost\Social\Wp\Admin\CloudPromo;
+use Fopost\Social\Wp\Tests\TestCase;
 
 class CloudPromoTest extends TestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
-        $GLOBALS['owlstack_test_user_meta']    = [];
-        $GLOBALS['owlstack_test_current_user'] = 0;
+        $GLOBALS['fopost_social_test_user_meta']    = [];
+        $GLOBALS['fopost_social_test_current_user'] = 0;
     }
 
     public function testUrlPointsAtTheMarketingSite(): void
@@ -51,7 +51,7 @@ class CloudPromoTest extends TestCase
 
     public function testDismissalIsPerUser(): void
     {
-        update_user_meta(7, 'owlstack_cloud_promo_dismissed', '1');
+        update_user_meta(7, 'fopost_social_cloud_promo_dismissed', '1');
 
         $this->assertTrue(CloudPromo::isDismissed(7));
         $this->assertFalse(CloudPromo::isDismissed(8));

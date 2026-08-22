@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Publishing;
+namespace Fopost\Social\Wp\Publishing;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Config\OwlstackConfig;
-use Owlstack\Core\Content\Media;
-use Owlstack\Core\Content\MediaCollection;
-use Owlstack\Core\Content\Post;
-use Owlstack\Core\Platforms\PlatformRegistry;
-use Owlstack\Core\Platforms\Telegram\TelegramPlatform;
-use Owlstack\Core\Publishing\Publisher;
-use Owlstack\Core\Publishing\PublishResult;
-use Owlstack\WordPress\Database\DeliveryLog;
+use Fopost\Social\Config\FopostConfig;
+use Fopost\Social\Content\Media;
+use Fopost\Social\Content\MediaCollection;
+use Fopost\Social\Content\Post;
+use Fopost\Social\Platforms\PlatformRegistry;
+use Fopost\Social\Platforms\Telegram\TelegramPlatform;
+use Fopost\Social\Publishing\Publisher;
+use Fopost\Social\Publishing\PublishResult;
+use Fopost\Social\Wp\Database\DeliveryLog;
 
 /**
  * High-level WordPress API for publishing content to social media platforms.
  *
  * Usage:
- *     owlstack()->telegram('Hello world!');
- *     owlstack()->twitter('Hello world!');
- *     owlstack()->toAll($post);
+ *     fopost_social()->telegram('Hello world!');
+ *     fopost_social()->twitter('Hello world!');
+ *     fopost_social()->toAll($post);
  */
 class SendTo
 {
@@ -31,7 +31,7 @@ class SendTo
 
     public function __construct(
         private readonly Publisher $publisher,
-        private readonly OwlstackConfig $config,
+        private readonly FopostConfig $config,
         private readonly PlatformRegistry $registry,
     ) {
     }
@@ -274,7 +274,7 @@ class SendTo
         );
 
         /** @var Post $post */
-        $post = apply_filters('owlstack_post_data', $post, $wpPost);
+        $post = apply_filters('fopost_social_post_data', $post, $wpPost);
 
         return $post;
     }
