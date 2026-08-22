@@ -187,12 +187,16 @@ class LegacyDataMigrator
             return;
         }
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $wpdb->query(
-            "INSERT INTO `{$target}`
-             (id, post_id, platform, status, external_id, external_url, error, payload, created_at)
-             SELECT id, post_id, platform, status, external_id, external_url, error, payload, created_at
-             FROM `{$legacy}`"
+            $wpdb->prepare(
+                'INSERT INTO %i
+                 (id, post_id, platform, status, external_id, external_url, error, payload, created_at)
+                 SELECT id, post_id, platform, status, external_id, external_url, error, payload, created_at
+                 FROM %i',
+                $target,
+                $legacy
+            )
         );
     }
 }

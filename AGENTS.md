@@ -2,92 +2,71 @@
 
 > **This is the single source of truth for all AI coding agents** working in this repository.
 > All agents (GitHub Copilot, Claude, ChatGPT, Cursor, Windsurf, Codex, etc.) MUST follow these rules.
-> Agent-specific files (`CLAUDE.md`, `.github/copilot-instructions.md`) extend this file — they do NOT replace it.
+> Agent-specific files (`CLAUDE.md`, `.github/copilot-instructions.md`) extend this file, they do NOT replace it.
 
 ---
 
 ## Project Overview
 
-**OwlStack WP** is a WordPress plugin that integrates [OwlStack Core](https://github.com/AliYmworworking/owlstack-core) with WordPress, enabling publishing of WordPress posts to social media platforms.
+**FoPost Social** is a WordPress plugin that integrates [FoPost Social Core](https://github.com/fopost/fopost-social-core) with WordPress, publishing WordPress posts out to social media platforms.
 
-> **Brand name:** "OwlStack" (capital S). The domain is `owlstack.app`.
+> **Brand name:** "FoPost" (capital F, capital P). The domain is `fopost.com`.
+
+It is the free, offline toolkit: it talks straight to each platform with the site owner's own app credentials. It has no FoPost account, no FoPost API key, and makes no outbound calls to any FoPost service. The separate `fopost/wordpress` plugin is the one that connects a site to the hosted product; that code does not belong here.
 
 | Property | Value |
 |----------|-------|
 | **Type** | WordPress plugin |
-| **Plugin slug** | `owlstack-wp` |
-| **Text Domain** | `owlstack-wp` |
-| **Admin menu slug** | `owlstack` |
+| **Plugin slug** | `fopost-social` |
+| **Text Domain** | `fopost-social` |
+| **Admin menu slug** | `fopost-social` |
+| **PHP namespace** | `Fopost\Social\Wp\` |
 | **PHP Version** | 8.1+ (strict types required) |
-| **Dependencies** | `owlstack/owlstack-core` (Composer) |
+| **Dependencies** | `fopost/social-core` (Composer) |
 | **License** | GPL-2.0-or-later |
 
 ---
 
 ## CRITICAL: Text Domain Rules
 
-The WordPress text domain **MUST** be `owlstack` — matching the plugin folder name inside `wp-content/plugins/`. This is a WordPress requirement for Plugin Check compatibility.
+The WordPress text domain **MUST** be `fopost-social`, matching the plugin folder name inside `wp-content/plugins/` and the WP.org slug. This is a WordPress requirement for Plugin Check compatibility.
 
-> **Note:** The development repo folder is `owlstack-wp`, but the WordPress plugin folder is `owlstack`. The text domain must match the **WordPress** folder name.
-
-### Text domain usage
-
-The text domain `'owlstack'` is used in ALL translation functions:
+The same string `'fopost-social'` is also the admin menu and settings-page slug.
 
 ```php
-// CORRECT — always use 'owlstack' as text domain
-__('Settings', 'owlstack')
-_e('Save', 'owlstack')
-esc_html__('Platform', 'owlstack')
-esc_html_e('Status', 'owlstack')
-_n('%s item', '%s items', $count, 'owlstack')
+// CORRECT
+__('Settings', 'fopost-social')
+_e('Save', 'fopost-social')
+esc_html__('Platform', 'fopost-social')
+esc_html_e('Status', 'fopost-social')
+_n('%s item', '%s items', $count, 'fopost-social')
+
+menu_slug: 'fopost-social',
+parent_slug: 'fopost-social',
+do_settings_sections('fopost-social');
 ```
 
-### `'owlstack'` is also the admin slug
-
-The same string `'owlstack'` is used for admin menu/page slugs:
-
-```php
-menu_slug: 'owlstack',
-parent_slug: 'owlstack',
-do_settings_sections('owlstack');
-add_settings_section('section_id', $title, $callback, 'owlstack');
-add_settings_field('field_id', $title, $callback, 'owlstack', 'section_id');
-```
-
-### Common mistake
-
-**NEVER** use `'owlstack-wp'` as a text domain:
-
-```php
-// WRONG — 'owlstack-wp' is NOT the text domain
-__('Settings', 'owlstack-wp')    // ← WRONG
-esc_html_e('Save', 'owlstack-wp') // ← WRONG
-```
-
-The plugin header in `owlstack.php` MUST say:
-```
-Text Domain: owlstack
-```
+Anything else as a second argument to `__()`, `_e()`, `esc_html__()`, `esc_html_e()`, `_n()` is a bug. The plugin header in `fopost-social.php` MUST say `Text Domain: fopost-social`.
 
 ---
 
 ## Directory Structure
 
 ```
-owlstack.php              # Main plugin file (plugin header, bootstrap)
+fopost-social.php          # Main plugin file (plugin header, bootstrap)
 src/
 ├── Plugin.php             # Core plugin class (hooks, assets, localization)
 ├── Activator.php          # Plugin activation logic
+├── Deactivator.php        # Plugin deactivation logic
 ├── Uninstaller.php        # Plugin uninstall logic
-├── helpers.php            # Helper functions (owlstack() singleton)
-├── Admin/                 # Admin UI (settings pages, meta box)
-│   ├── SettingsPage.php
-│   ├── DeliveryLogsPage.php
-│   ├── MetaBox.php
+├── LegacyDataMigrator.php # One-time copy of pre-rebrand `owlstack` data
+├── helpers.php            # Helper functions (fopost_social() singleton)
+├── Admin/                 # Admin UI (settings pages, meta box, promo card)
 │   └── views/             # PHP view templates
 ├── Auth/                  # WordPress token storage
 ├── Database/              # Custom DB tables (delivery logs)
+├── Events/                # Core event dispatcher bridge
+├── Http/                  # WP HTTP API client
 ├── Publishing/            # WordPress-specific publishing logic
 └── Rest/                  # REST API endpoints
 ```
@@ -96,20 +75,26 @@ src/
 
 ## Coding Standards
 
-- Follow **WordPress Coding Standards** (PHPCS with `WordPress` ruleset)
-- Use `phpcs:ignore` or `phpcs:disable` comments ONLY when a violation is intentional and unavoidable
 - All PHP files must have `declare(strict_types=1);`
-- All translatable strings must use the `'owlstack-wp'` text domain
-- Option names and hook names use the `owlstack_` prefix (e.g., `owlstack_settings`, `owlstack_delivery_logs`)
+- All translatable strings use the `'fopost-social'` text domain
+- Option, transient, hook, and capability names use the `fopost_social_` prefix; slugs and CSS classes use `fopost-social-`
+- Use `phpcs:ignore` or `phpcs:disable` comments ONLY when a violation is intentional and unavoidable
+- Run PHPCS with the repo's own ruleset: `php -d xdebug.mode=off vendor/bin/phpcs`. Do NOT run the raw `--standard=WordPress` ruleset; the codebase intentionally does not follow its formatting rules
+
+---
+
+## Stored Data Is User Data
+
+Never rename an option, transient, post meta, user meta, capability, or table name in place. If a key has to change, add a copy-forward step to `src/LegacyDataMigrator.php` that writes the new key and leaves the old one intact.
 
 ---
 
 ## Git Workflow
 
 1. Create a feature branch from `main`
-2. Make changes and run PHPCS: `php -d xdebug.mode=off vendor/bin/phpcs --standard=WordPress src/ owlstack.php`
-3. Commit with conventional commit messages (`fix:`, `feat:`, `docs:`, etc.)
-4. Push and create a PR against `main`
+2. Make changes, then run `./vendor/bin/phpunit` and `php -d xdebug.mode=off vendor/bin/phpcs`. Both must pass before each commit
+3. Commit with conventional commit messages (`fix:`, `feat:`, `docs:`, etc.), one logical change per commit
+4. Push and open a PR against `main`
 
 ---
 
@@ -117,7 +102,8 @@ src/
 
 Before submitting a PR:
 
-- [ ] PHPCS passes on `src/` and `owlstack.php`
-- [ ] Text domain is `'owlstack-wp'` in ALL translation functions
-- [ ] Plugin header `Text Domain:` matches `owlstack-wp`
-- [ ] No `'owlstack'` used as text domain (only as menu/settings slug)
+- [ ] `./vendor/bin/phpunit` passes
+- [ ] PHPCS passes on `src/`, `fopost-social.php`, and `uninstall.php`
+- [ ] Text domain is `'fopost-social'` in ALL translation functions
+- [ ] Plugin header `Text Domain:` matches `fopost-social`
+- [ ] No new outbound call to any FoPost service
