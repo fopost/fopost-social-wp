@@ -14,18 +14,18 @@ use Fopost\Social\Events\Contracts\EventDispatcherInterface;
  * Dispatches events as WordPress actions so developers can hook in
  * using standard add_action() calls:
  *
- *     add_action('owlstack_post_published', function (PostPublished $event) { ... });
- *     add_action('owlstack_post_failed', function (PostFailed $event) { ... });
+ *     add_action('fopost_social_post_published', function (PostPublished $event) { ... });
+ *     add_action('fopost_social_post_failed', function (PostFailed $event) { ... });
  */
 class WpEventDispatcher implements EventDispatcherInterface
 {
     public function dispatch(object $event): void
     {
         $className = (new \ReflectionClass($event))->getShortName();
-        $hookName = 'owlstack_' . $this->toSnakeCase($className);
+        $hookName = 'fopost_social_' . $this->toSnakeCase($className);
 
         /** @phpstan-ignore-next-line */
-        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is always prefixed with 'owlstack_'.
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is always prefixed with 'fopost_social_'.
         do_action($hookName, $event);
     }
 

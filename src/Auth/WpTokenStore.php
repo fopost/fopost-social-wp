@@ -17,7 +17,7 @@ use Fopost\Social\Auth\Contracts\TokenStoreInterface;
  */
 class WpTokenStore implements TokenStoreInterface
 {
-    private const OPTION_PREFIX = 'owlstack_token_';
+    private const OPTION_PREFIX = 'fopost_social_token_';
 
     public function get(string $platform, string $accountId): ?AccessToken
     {

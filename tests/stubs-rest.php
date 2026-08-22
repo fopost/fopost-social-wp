@@ -13,8 +13,8 @@
  * @package Fopost\Social\Wp\Tests
  */
 
-$GLOBALS['owlstack_test_posts'] = [];
-$GLOBALS['owlstack_test_meta']  = [];
+$GLOBALS['fopost_social_test_posts'] = [];
+$GLOBALS['fopost_social_test_meta']  = [];
 
 if (! class_exists('WP_Error')) {
     class WP_Error
@@ -149,28 +149,28 @@ if (! function_exists('register_rest_route')) {
 if (! function_exists('get_post')) {
     function get_post(int $id): ?WP_Post
     {
-        return $GLOBALS['owlstack_test_posts'][$id] ?? null;
+        return $GLOBALS['fopost_social_test_posts'][$id] ?? null;
     }
 }
 
 if (! function_exists('get_post_status')) {
     function get_post_status(int $id): string|false
     {
-        return $GLOBALS['owlstack_test_posts'][$id]->post_status ?? false;
+        return $GLOBALS['fopost_social_test_posts'][$id]->post_status ?? false;
     }
 }
 
 if (! function_exists('get_post_type')) {
     function get_post_type(int $id): string|false
     {
-        return $GLOBALS['owlstack_test_posts'][$id]->post_type ?? false;
+        return $GLOBALS['fopost_social_test_posts'][$id]->post_type ?? false;
     }
 }
 
 if (! function_exists('get_post_meta')) {
     function get_post_meta(int $id, string $key, bool $single = false): mixed
     {
-        return $GLOBALS['owlstack_test_meta'][$id][$key] ?? '';
+        return $GLOBALS['fopost_social_test_meta'][$id][$key] ?? '';
     }
 }
 

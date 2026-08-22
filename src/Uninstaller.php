@@ -34,8 +34,9 @@ class Uninstaller
      */
     private static function removeOptions(): void
     {
-        delete_option('owlstack_settings');
-        delete_option('owlstack_db_version');
+        delete_option('fopost_social_settings');
+        delete_option('fopost_social_db_version');
+        delete_option(LegacyDataMigrator::FLAG_OPTION);
     }
 
     /**
@@ -49,7 +50,7 @@ class Uninstaller
         $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
-                '_owlstack_%'
+                '_fopost_social_%'
             )
         );
     }
@@ -65,7 +66,7 @@ class Uninstaller
         $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
-                'owlstack_token_%'
+                'fopost_social_token_%'
             )
         );
     }
@@ -83,7 +84,7 @@ class Uninstaller
      */
     private static function removeCapabilities(): void
     {
-        $capabilities = ['manage_owlstack', 'owlstack_publish', 'owlstack_view_logs'];
+        $capabilities = ['manage_fopost_social', 'fopost_social_publish', 'fopost_social_view_logs'];
 
         foreach (wp_roles()->roles as $roleName => $roleData) {
             $role = get_role($roleName);
@@ -108,8 +109,8 @@ class Uninstaller
         $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
-                '_transient_owlstack_%',
-                '_transient_timeout_owlstack_%'
+                '_transient_fopost_social_%',
+                '_transient_timeout_fopost_social_%'
             )
         );
     }

@@ -20,9 +20,9 @@ use Fopost\Social\Wp\Database\DeliveryLog;
  * High-level WordPress API for publishing content to social media platforms.
  *
  * Usage:
- *     owlstack()->telegram('Hello world!');
- *     owlstack()->twitter('Hello world!');
- *     owlstack()->toAll($post);
+ *     fopost_social()->telegram('Hello world!');
+ *     fopost_social()->twitter('Hello world!');
+ *     fopost_social()->toAll($post);
  */
 class SendTo
 {
@@ -274,7 +274,7 @@ class SendTo
         );
 
         /** @var Post $post */
-        $post = apply_filters('owlstack_post_data', $post, $wpPost);
+        $post = apply_filters('fopost_social_post_data', $post, $wpPost);
 
         return $post;
     }

@@ -15,7 +15,7 @@ use Fopost\Social\Config\FopostConfig;
  */
 class OptionsManager
 {
-    private const OPTION_KEY = 'owlstack_settings';
+    private const OPTION_KEY = 'fopost_social_settings';
 
     /**
      * Build a FopostConfig from stored WordPress options.

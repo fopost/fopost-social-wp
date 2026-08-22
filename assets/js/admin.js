@@ -11,23 +11,23 @@
      * Test Connection handler for the Settings page.
      */
     function initTestConnection() {
-        $('.owlstack-test-btn').on('click', function (e) {
+        $('.fopost-social-test-btn').on('click', function (e) {
             e.preventDefault();
 
             var $btn = $(this);
             var platform = $btn.data('platform');
-            var $spinner = $btn.closest('td, .owlstack-test-buttons').find('.spinner');
-            var $result = $('#owlstack-test-result');
+            var $spinner = $btn.closest('td, .fopost-social-test-buttons').find('.spinner');
+            var $result = $('#fopost-social-test-result');
 
             $btn.prop('disabled', true);
             $spinner.addClass('is-active');
             $result.empty();
 
             $.ajax({
-                url: owlstackAdmin.restUrl + 'test-connection',
+                url: fopostSocialAdmin.restUrl + 'test-connection',
                 method: 'POST',
                 headers: {
-                    'X-WP-Nonce': owlstackAdmin.nonce,
+                    'X-WP-Nonce': fopostSocialAdmin.nonce,
                 },
                 data: JSON.stringify({ platform: platform }),
                 contentType: 'application/json',
@@ -36,7 +36,7 @@
                 .done(function (response) {
                     var cls = response.success ? 'success' : 'error';
                     $result.html(
-                        '<span class="owlstack-test-result ' +
+                        '<span class="fopost-social-test-result ' +
                             cls +
                             '">' +
                             escapeHtml(response.message) +
@@ -47,10 +47,10 @@
                     var msg =
                         xhr.responseJSON && xhr.responseJSON.message
                             ? xhr.responseJSON.message
-                            : owlstackAdmin.i18n.connectionFailed;
+                            : fopostSocialAdmin.i18n.connectionFailed;
 
                     $result.html(
-                        '<span class="owlstack-test-result error">' +
+                        '<span class="fopost-social-test-result error">' +
                             escapeHtml(msg) +
                             '</span>'
                     );
@@ -66,24 +66,24 @@
      * Test Message handler — sends a sample text message to a platform.
      */
     function initTestMessage() {
-        $('.owlstack-test-message-btn').on('click', function (e) {
+        $('.fopost-social-test-message-btn').on('click', function (e) {
             e.preventDefault();
 
             var $btn = $(this);
             var platform = $btn.data('platform');
             var type = $btn.data('type');
             var $spinner = $btn.closest('td').find('.spinner');
-            var $result = $('#owlstack-test-result');
+            var $result = $('#fopost-social-test-result');
 
             $btn.prop('disabled', true);
             $spinner.addClass('is-active');
             $result.empty();
 
             $.ajax({
-                url: owlstackAdmin.restUrl + 'test-message',
+                url: fopostSocialAdmin.restUrl + 'test-message',
                 method: 'POST',
                 headers: {
-                    'X-WP-Nonce': owlstackAdmin.nonce,
+                    'X-WP-Nonce': fopostSocialAdmin.nonce,
                 },
                 data: JSON.stringify({ platform: platform, type: type }),
                 contentType: 'application/json',
@@ -98,23 +98,23 @@
                             ' <a href="' +
                             escapeHtml(response.external_url) +
                             '" target="_blank" rel="noopener">' +
-                            escapeHtml(owlstackAdmin.i18n.viewPost || 'View Post') +
+                            escapeHtml(fopostSocialAdmin.i18n.viewPost || 'View Post') +
                             '</a>';
                     }
 
                     $result.html(
-                        '<span class="owlstack-test-result ' + cls + '">' + html + '</span>'
+                        '<span class="fopost-social-test-result ' + cls + '">' + html + '</span>'
                     );
                 })
                 .fail(function (xhr) {
                     var msg =
                         xhr.responseJSON && xhr.responseJSON.message
                             ? xhr.responseJSON.message
-                            : owlstackAdmin.i18n.testMessageFailed ||
+                            : fopostSocialAdmin.i18n.testMessageFailed ||
                               'Failed to send test message.';
 
                     $result.html(
-                        '<span class="owlstack-test-result error">' +
+                        '<span class="fopost-social-test-result error">' +
                             escapeHtml(msg) +
                             '</span>'
                     );
@@ -130,13 +130,13 @@
      * Per-platform Publish handler for the Meta Box.
      */
     function initPublishSingle() {
-        $('.owlstack-publish-single-btn').on('click', function (e) {
+        $('.fopost-social-publish-single-btn').on('click', function (e) {
             e.preventDefault();
 
             var $btn = $(this);
-            var $row = $btn.closest('.owlstack-platform-row');
+            var $row = $btn.closest('.fopost-social-platform-row');
             var $spinner = $row.find('.spinner');
-            var $result = $row.find('.owlstack-platform-result');
+            var $result = $row.find('.fopost-social-platform-result');
             var postId = $btn.data('post-id');
             var platform = $btn.data('platform');
 
@@ -145,10 +145,10 @@
             $result.empty().removeClass('success error');
 
             $.ajax({
-                url: owlstackAdmin.restUrl + 'publish',
+                url: fopostSocialAdmin.restUrl + 'publish',
                 method: 'POST',
                 headers: {
-                    'X-WP-Nonce': owlstackAdmin.nonce,
+                    'X-WP-Nonce': fopostSocialAdmin.nonce,
                 },
                 data: JSON.stringify({
                     post_id: postId,
@@ -166,14 +166,14 @@
                                 '✓ <a href="' +
                                 escapeHtml(r.external_url) +
                                 '" target="_blank" rel="noopener">' +
-                                escapeHtml(owlstackAdmin.i18n.viewPost) +
+                                escapeHtml(fopostSocialAdmin.i18n.viewPost) +
                                 '</a>';
                         }
                         $result.html(html).addClass('success');
                     } else {
-                        var err = r ? r.error : owlstackAdmin.i18n.unknownError;
+                        var err = r ? r.error : fopostSocialAdmin.i18n.unknownError;
                         $result
-                            .html('✗ ' + escapeHtml(err || owlstackAdmin.i18n.unknownError))
+                            .html('✗ ' + escapeHtml(err || fopostSocialAdmin.i18n.unknownError))
                             .addClass('error');
                     }
                 })
@@ -181,7 +181,7 @@
                     var msg =
                         xhr.responseJSON && xhr.responseJSON.message
                             ? xhr.responseJSON.message
-                            : owlstackAdmin.i18n.publishFailed;
+                            : fopostSocialAdmin.i18n.publishFailed;
 
                     $result.html('✗ ' + escapeHtml(msg)).addClass('error');
                 })
@@ -196,24 +196,24 @@
      * Publish All Selected handler for the Meta Box.
      */
     function initPublishNow() {
-        $('.owlstack-publish-all-btn').on('click', function (e) {
+        $('.fopost-social-publish-all-btn').on('click', function (e) {
             e.preventDefault();
 
             var $btn = $(this);
-            var $spinner = $btn.siblings('.owlstack-publish-all-spinner');
-            var $resultContainer = $('.owlstack-publish-status');
+            var $spinner = $btn.siblings('.fopost-social-publish-all-spinner');
+            var $resultContainer = $('.fopost-social-publish-status');
             var postId = $btn.data('post-id');
 
             // Gather selected platforms.
             var platforms = [];
-            $('input[name="owlstack_platforms[]"]:checked').each(function () {
+            $('input[name="fopost_social_platforms[]"]:checked').each(function () {
                 platforms.push($(this).val());
             });
 
             if (platforms.length === 0) {
                 $resultContainer
-                    .html(owlstackAdmin.i18n.noPlatformsSelected)
-                    .attr('class', 'owlstack-publish-result error')
+                    .html(fopostSocialAdmin.i18n.noPlatformsSelected)
+                    .attr('class', 'fopost-social-publish-result error')
                     .show();
                 return;
             }
@@ -223,10 +223,10 @@
             $resultContainer.hide();
 
             $.ajax({
-                url: owlstackAdmin.restUrl + 'publish',
+                url: fopostSocialAdmin.restUrl + 'publish',
                 method: 'POST',
                 headers: {
-                    'X-WP-Nonce': owlstackAdmin.nonce,
+                    'X-WP-Nonce': fopostSocialAdmin.nonce,
                 },
                 data: JSON.stringify({
                     post_id: postId,
@@ -241,15 +241,15 @@
 
                     $.each(response.results, function (platform, result) {
                         // Update per-platform row indicators.
-                        var $row = $('.owlstack-platform-row[data-platform="' + platform + '"]');
-                        var $rowResult = $row.find('.owlstack-platform-result');
+                        var $row = $('.fopost-social-platform-row[data-platform="' + platform + '"]');
+                        var $rowResult = $row.find('.fopost-social-platform-result');
 
                         if (result.success) {
                             var link = result.external_url
                                 ? ' (<a href="' +
                                   escapeHtml(result.external_url) +
                                   '" target="_blank">' +
-                                  owlstackAdmin.i18n.viewPost +
+                                  fopostSocialAdmin.i18n.viewPost +
                                   '</a>)'
                                 : '';
                             messages.push(
@@ -265,7 +265,7 @@
                                 '<strong>' +
                                     escapeHtml(platform) +
                                     '</strong>: ✗ ' +
-                                    escapeHtml(result.error || owlstackAdmin.i18n.unknownError)
+                                    escapeHtml(result.error || fopostSocialAdmin.i18n.unknownError)
                             );
                             $rowResult.html('✗').removeClass('success').addClass('error');
                         }
@@ -279,18 +279,18 @@
 
                     $resultContainer
                         .html(messages.join('<br>'))
-                        .attr('class', 'owlstack-publish-result ' + cls)
+                        .attr('class', 'fopost-social-publish-result ' + cls)
                         .show();
                 })
                 .fail(function (xhr) {
                     var msg =
                         xhr.responseJSON && xhr.responseJSON.message
                             ? xhr.responseJSON.message
-                            : owlstackAdmin.i18n.publishFailed;
+                            : fopostSocialAdmin.i18n.publishFailed;
 
                     $resultContainer
                         .html(escapeHtml(msg))
-                        .attr('class', 'owlstack-publish-result error')
+                        .attr('class', 'fopost-social-publish-result error')
                         .show();
                 })
                 .always(function () {
@@ -326,7 +326,7 @@
      * Initialize on DOM ready.
      */
     $(function () {
-        if (typeof owlstackAdmin === 'undefined') {
+        if (typeof fopostSocialAdmin === 'undefined') {
             return;
         }
 

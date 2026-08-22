@@ -11,59 +11,59 @@ if (! defined('ABSPATH')) {
 /** @var bool $autoPublish */
 /** @var WP_Post $post */
 
-wp_nonce_field('owlstack_meta_box', 'owlstack_meta_box_nonce');
+wp_nonce_field('fopost_social_meta_box', 'fopost_social_meta_box_nonce');
 
-$owlstack_platform_labels = \Fopost\Social\Wp\Admin\SettingsPage::platforms();
+$fopost_social_platform_labels = \Fopost\Social\Wp\Admin\SettingsPage::platforms();
 ?>
 
-<div class="owlstack-meta-box">
+<div class="fopost-social-meta-box">
     <?php if (empty($configuredPlatforms)) : ?>
-        <p class="owlstack-no-platforms">
+        <p class="fopost-social-no-platforms">
             <?php
             printf(
                 /* translators: %s: link open tag, %s: link close tag */
-                esc_html__('No platforms configured. %1$sConfigure platforms%2$s in Owlstack settings.', 'owlstack'),
-                '<a href="' . esc_url(admin_url('admin.php?page=owlstack')) . '">',
+                esc_html__('No platforms configured. %1$sConfigure platforms%2$s in Owlstack settings.', 'fopost-social'),
+                '<a href="' . esc_url(admin_url('admin.php?page=fopost-social')) . '">',
                 '</a>',
             );
             ?>
         </p>
     <?php else : ?>
-        <p class="owlstack-meta-label"><strong><?php esc_html_e('Publish to:', 'owlstack'); ?></strong></p>
+        <p class="fopost-social-meta-label"><strong><?php esc_html_e('Publish to:', 'fopost-social'); ?></strong></p>
 
-        <table class="owlstack-platform-list">
+        <table class="fopost-social-platform-list">
             <tbody>
-            <?php foreach ($configuredPlatforms as $owlstack_platform) :
-                $owlstack_label = $owlstack_platform_labels[$owlstack_platform]['label'] ?? ucfirst($owlstack_platform);
+            <?php foreach ($configuredPlatforms as $fopost_social_platform) :
+                $fopost_social_label = $fopost_social_platform_labels[$fopost_social_platform]['label'] ?? ucfirst($fopost_social_platform);
             ?>
-                <tr class="owlstack-platform-row" data-platform="<?php echo esc_attr($owlstack_platform); ?>">
-                    <td class="owlstack-platform-checkbox-col">
+                <tr class="fopost-social-platform-row" data-platform="<?php echo esc_attr($fopost_social_platform); ?>">
+                    <td class="fopost-social-platform-checkbox-col">
                         <input
                             type="checkbox"
-                            name="owlstack_platforms[]"
-                            value="<?php echo esc_attr($owlstack_platform); ?>"
-                            <?php checked(in_array($owlstack_platform, $selectedPlatforms, true)); ?>
+                            name="fopost_social_platforms[]"
+                            value="<?php echo esc_attr($fopost_social_platform); ?>"
+                            <?php checked(in_array($fopost_social_platform, $selectedPlatforms, true)); ?>
                         />
                     </td>
-                    <td class="owlstack-platform-name-col">
-                        <span class="owlstack-badge owlstack-badge--<?php echo esc_attr($owlstack_platform); ?>"><?php echo esc_html($owlstack_label); ?></span>
+                    <td class="fopost-social-platform-name-col">
+                        <span class="fopost-social-badge fopost-social-badge--<?php echo esc_attr($fopost_social_platform); ?>"><?php echo esc_html($fopost_social_label); ?></span>
                     </td>
-                    <td class="owlstack-platform-action-col">
+                    <td class="fopost-social-platform-action-col">
                         <button type="button"
-                                class="button button-small owlstack-publish-single-btn"
+                                class="button button-small fopost-social-publish-single-btn"
                                 data-post-id="<?php echo esc_attr((string) $post->ID); ?>"
-                                data-platform="<?php echo esc_attr($owlstack_platform); ?>"
+                                data-platform="<?php echo esc_attr($fopost_social_platform); ?>"
                                 title="<?php echo esc_attr(sprintf(
                                     /* translators: %s: platform name */
-                                    __('Publish to %s', 'owlstack'),
-                                    $owlstack_label
+                                    __('Publish to %s', 'fopost-social'),
+                                    $fopost_social_label
                                 )); ?>">
-                            <?php esc_html_e('Publish', 'owlstack'); ?>
+                            <?php esc_html_e('Publish', 'fopost-social'); ?>
                         </button>
                         <span class="spinner"></span>
                     </td>
-                    <td class="owlstack-platform-status-col">
-                        <span class="owlstack-platform-result"></span>
+                    <td class="fopost-social-platform-status-col">
+                        <span class="fopost-social-platform-result"></span>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -72,22 +72,22 @@ $owlstack_platform_labels = \Fopost\Social\Wp\Admin\SettingsPage::platforms();
 
         <hr />
 
-        <label class="owlstack-auto-publish">
+        <label class="fopost-social-auto-publish">
             <input
                 type="checkbox"
-                name="owlstack_auto_publish"
+                name="fopost_social_auto_publish"
                 value="1"
                 <?php checked($autoPublish); ?>
             />
-            <?php esc_html_e('Auto-publish when post is published', 'owlstack'); ?>
+            <?php esc_html_e('Auto-publish when post is published', 'fopost-social'); ?>
         </label>
 
         <hr />
 
-        <button type="button" class="button button-primary owlstack-publish-all-btn" data-post-id="<?php echo esc_attr((string) $post->ID); ?>">
-            <?php esc_html_e('Publish All Selected', 'owlstack'); ?>
+        <button type="button" class="button button-primary fopost-social-publish-all-btn" data-post-id="<?php echo esc_attr((string) $post->ID); ?>">
+            <?php esc_html_e('Publish All Selected', 'fopost-social'); ?>
         </button>
-        <span class="spinner owlstack-publish-all-spinner"></span>
-        <div class="owlstack-publish-status"></div>
+        <span class="spinner fopost-social-publish-all-spinner"></span>
+        <div class="fopost-social-publish-status"></div>
     <?php endif; ?>
 </div>

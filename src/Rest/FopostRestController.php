@@ -14,16 +14,16 @@ use Fopost\Social\Wp\Plugin;
 /**
  * REST API controller for Owlstack endpoints.
  *
- * Registers routes under the `owlstack/v1` namespace:
- *   POST   /owlstack/v1/test-connection
- *   POST   /owlstack/v1/test-message
- *   POST   /owlstack/v1/publish
- *   GET    /owlstack/v1/delivery-logs
- *   DELETE /owlstack/v1/delivery-logs/(?P<id>\d+)
+ * Registers routes under the `fopost-social/v1` namespace:
+ *   POST   /fopost-social/v1/test-connection
+ *   POST   /fopost-social/v1/test-message
+ *   POST   /fopost-social/v1/publish
+ *   GET    /fopost-social/v1/delivery-logs
+ *   DELETE /fopost-social/v1/delivery-logs/(?P<id>\d+)
  */
 class FopostRestController
 {
-    private const NAMESPACE = 'owlstack/v1';
+    private const NAMESPACE = 'fopost-social/v1';
 
     /**
      * Register REST routes.
@@ -136,7 +136,7 @@ class FopostRestController
                     'success' => false,
                     'message' => sprintf(
                         /* translators: %s: platform name */
-                        __('Platform "%s" is not configured.', 'owlstack'),
+                        __('Platform "%s" is not configured.', 'fopost-social'),
                         $platform,
                     ),
                 ], 400);
@@ -158,7 +158,7 @@ class FopostRestController
 
             return new \WP_REST_Response([
                 'success' => false,
-                'message' => __('An internal error occurred while testing the connection.', 'owlstack'),
+                'message' => __('An internal error occurred while testing the connection.', 'fopost-social'),
             ], 500);
         }
     }
@@ -180,7 +180,7 @@ class FopostRestController
                     'success' => false,
                     'message' => sprintf(
                         /* translators: %s: platform name */
-                        __('Platform "%s" is not configured. Save your credentials first.', 'owlstack'),
+                        __('Platform "%s" is not configured. Save your credentials first.', 'fopost-social'),
                         $label,
                     ),
                 ], 400);
@@ -201,7 +201,7 @@ class FopostRestController
                     $label,
                 ),
                 url: $siteUrl,
-                tags: ['owlstack', 'test'],
+                tags: ['fopost-social', 'test'],
             );
 
             $publisher = $plugin->publisher();
@@ -212,7 +212,7 @@ class FopostRestController
                     'success'      => true,
                     'message'      => sprintf(
                         /* translators: %s: platform name */
-                        __('Test message sent to %s successfully!', 'owlstack'),
+                        __('Test message sent to %s successfully!', 'fopost-social'),
                         $label,
                     ),
                     'external_id'  => $result->externalId,
@@ -224,9 +224,9 @@ class FopostRestController
                 'success' => false,
                 'message' => sprintf(
                     /* translators: 1: platform name, 2: error message */
-                    __('Failed to send test message to %1$s: %2$s', 'owlstack'),
+                    __('Failed to send test message to %1$s: %2$s', 'fopost-social'),
                     $label,
-                    $result->error ?? __('Unknown error.', 'owlstack'),
+                    $result->error ?? __('Unknown error.', 'fopost-social'),
                 ),
             ], 422);
         } catch (\Throwable $e) {
@@ -240,7 +240,7 @@ class FopostRestController
                 'success' => false,
                 'message' => sprintf(
                     /* translators: %s: platform name */
-                    __('An error occurred while sending the test message to %s.', 'owlstack'),
+                    __('An error occurred while sending the test message to %s.', 'fopost-social'),
                     $label,
                 ),
             ], 500);
@@ -258,7 +258,7 @@ class FopostRestController
         if (! $wpPost instanceof \WP_Post) {
             return new \WP_REST_Response([
                 'success' => false,
-                'message' => __('Post not found.', 'owlstack'),
+                'message' => __('Post not found.', 'fopost-social'),
             ], 404);
         }
 
@@ -270,7 +270,7 @@ class FopostRestController
         if (empty($platforms)) {
             return new \WP_REST_Response([
                 'success' => false,
-                'message' => __('No platforms selected.', 'owlstack'),
+                'message' => __('No platforms selected.', 'fopost-social'),
             ], 400);
         }
 
@@ -278,7 +278,7 @@ class FopostRestController
         $post = $sendTo->buildPostFromWpPost($wpPost);
 
         /** @var array $options */
-        $options = apply_filters('owlstack_publish_options', [], $wpPost);
+        $options = apply_filters('fopost_social_publish_options', [], $wpPost);
 
         $results = [];
         foreach ($platforms as $platform) {
@@ -338,7 +338,7 @@ class FopostRestController
         if ($log === null) {
             return new \WP_REST_Response([
                 'success' => false,
-                'message' => __('Log entry not found.', 'owlstack'),
+                'message' => __('Log entry not found.', 'fopost-social'),
             ], 404);
         }
 
@@ -346,7 +346,7 @@ class FopostRestController
 
         return new \WP_REST_Response([
             'success' => true,
-            'message' => __('Log entry deleted.', 'owlstack'),
+            'message' => __('Log entry deleted.', 'fopost-social'),
         ]);
     }
 
@@ -354,17 +354,17 @@ class FopostRestController
 
     public static function canManage(): bool
     {
-        return current_user_can('manage_owlstack');
+        return current_user_can('manage_fopost_social');
     }
 
     public static function canPublish(): bool
     {
-        return current_user_can('owlstack_publish');
+        return current_user_can('fopost_social_publish');
     }
 
     public static function canViewLogs(): bool
     {
-        return current_user_can('owlstack_view_logs');
+        return current_user_can('fopost_social_view_logs');
     }
 
     // ── Platform test helpers ────────────────────────────────────────────
@@ -399,7 +399,7 @@ class FopostRestController
                     'success' => true,
                     'message' => sprintf(
                         /* translators: %s: platform name */
-                        __('%s connection successful.', 'owlstack'),
+                        __('%s connection successful.', 'fopost-social'),
                         $label,
                     ),
                 ];
@@ -409,7 +409,7 @@ class FopostRestController
                 'success' => false,
                 'message' => sprintf(
                     /* translators: %s: platform name */
-                    __('Failed to validate %s credentials.', 'owlstack'),
+                    __('Failed to validate %s credentials.', 'fopost-social'),
                     $label,
                 ),
             ];
@@ -424,7 +424,7 @@ class FopostRestController
                 'success' => false,
                 'message' => sprintf(
                     /* translators: %s: platform name */
-                    __('Failed to connect to %s. Check your credentials and try again.', 'owlstack'),
+                    __('Failed to connect to %s. Check your credentials and try again.', 'fopost-social'),
                     $label,
                 ),
             ];

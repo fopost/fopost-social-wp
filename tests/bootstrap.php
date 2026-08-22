@@ -78,19 +78,19 @@ if (! function_exists('apply_filters')) {
 }
 
 // Stateful option store so services that persist options can be unit-tested.
-$GLOBALS['owlstack_test_options'] = [];
+$GLOBALS['fopost_social_test_options'] = [];
 
 if (! function_exists('get_option')) {
     function get_option(string $option, mixed $default = false): mixed
     {
-        return $GLOBALS['owlstack_test_options'][$option] ?? $default;
+        return $GLOBALS['fopost_social_test_options'][$option] ?? $default;
     }
 }
 
 if (! function_exists('update_option')) {
     function update_option(string $option, mixed $value, string|bool $autoload = 'yes'): bool
     {
-        $GLOBALS['owlstack_test_options'][$option] = $value;
+        $GLOBALS['fopost_social_test_options'][$option] = $value;
 
         return true;
     }
@@ -99,7 +99,7 @@ if (! function_exists('update_option')) {
 if (! function_exists('delete_option')) {
     function delete_option(string $option): bool
     {
-        unset($GLOBALS['owlstack_test_options'][$option]);
+        unset($GLOBALS['fopost_social_test_options'][$option]);
 
         return true;
     }
@@ -182,21 +182,21 @@ if (! function_exists('add_query_arg')) {
 if (! function_exists('get_current_user_id')) {
     function get_current_user_id(): int
     {
-        return $GLOBALS['owlstack_test_current_user'] ?? 0;
+        return $GLOBALS['fopost_social_test_current_user'] ?? 0;
     }
 }
 
 if (! function_exists('get_user_meta')) {
     function get_user_meta(int $userId, string $key, bool $single = false)
     {
-        return $GLOBALS['owlstack_test_user_meta'][$userId][$key] ?? '';
+        return $GLOBALS['fopost_social_test_user_meta'][$userId][$key] ?? '';
     }
 }
 
 if (! function_exists('update_user_meta')) {
     function update_user_meta(int $userId, string $key, $value): bool
     {
-        $GLOBALS['owlstack_test_user_meta'][$userId][$key] = $value;
+        $GLOBALS['fopost_social_test_user_meta'][$userId][$key] = $value;
 
         return true;
     }

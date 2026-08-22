@@ -88,6 +88,9 @@ class Plugin
 
         $this->booted = true;
 
+        // Carry data forward from the plugin's previous `owlstack` prefix.
+        LegacyDataMigrator::run();
+
         // Build services.
         $this->buildServices();
 
@@ -334,7 +337,7 @@ class Plugin
      */
     public function showActivationNotice(): void
     {
-        $notice = get_transient('owlstack_activation_notice');
+        $notice = get_transient('fopost_social_activation_notice');
 
         if ($notice === false || ! is_array($notice)) {
             return;
@@ -349,7 +352,7 @@ class Plugin
             esc_html($message),
         );
 
-        delete_transient('owlstack_activation_notice');
+        delete_transient('fopost_social_activation_notice');
     }
 
     /**
@@ -357,54 +360,54 @@ class Plugin
      */
     public function enqueueAdminAssets(string $hook): void
     {
-        $owlstackPages = [
-            'toplevel_page_owlstack',
-            'owlstack_page_owlstack-logs',
-            'owlstack_page_owlstack-telegram',
-            'owlstack_page_owlstack-twitter',
-            'owlstack_page_owlstack-facebook',
-            'owlstack_page_owlstack-instagram',
-            'owlstack_page_owlstack-linkedin',
-            'owlstack_page_owlstack-discord',
-            'owlstack_page_owlstack-pinterest',
-            'owlstack_page_owlstack-reddit',
-            'owlstack_page_owlstack-slack',
-            'owlstack_page_owlstack-tumblr',
-            'owlstack_page_owlstack-whatsapp',
+        $fopostSocialPages = [
+            'toplevel_page_fopost-social',
+            'fopost-social_page_fopost-social-logs',
+            'fopost-social_page_fopost-social-telegram',
+            'fopost-social_page_fopost-social-twitter',
+            'fopost-social_page_fopost-social-facebook',
+            'fopost-social_page_fopost-social-instagram',
+            'fopost-social_page_fopost-social-linkedin',
+            'fopost-social_page_fopost-social-discord',
+            'fopost-social_page_fopost-social-pinterest',
+            'fopost-social_page_fopost-social-reddit',
+            'fopost-social_page_fopost-social-slack',
+            'fopost-social_page_fopost-social-tumblr',
+            'fopost-social_page_fopost-social-whatsapp',
         ];
 
         // Also load on post edit screens for the meta box.
         $postPages = ['post.php', 'post-new.php'];
 
-        if (! in_array($hook, array_merge($owlstackPages, $postPages), true)) {
+        if (! in_array($hook, array_merge($fopostSocialPages, $postPages), true)) {
             return;
         }
 
         wp_enqueue_style(
-            'owlstack-admin',
+            'fopost-social-admin',
             FOPOST_SOCIAL_URL . 'assets/css/admin.css',
             [],
             FOPOST_SOCIAL_VERSION,
         );
 
         wp_enqueue_script(
-            'owlstack-admin',
+            'fopost-social-admin',
             FOPOST_SOCIAL_URL . 'assets/js/admin.js',
             ['jquery'],
             FOPOST_SOCIAL_VERSION,
             true,
         );
 
-        wp_localize_script('owlstack-admin', 'owlstackAdmin', [
-            'restUrl' => rest_url('owlstack/v1/'),
+        wp_localize_script('fopost-social-admin', 'fopostSocialAdmin', [
+            'restUrl' => rest_url('fopost-social/v1/'),
             'nonce'   => wp_create_nonce('wp_rest'),
             'i18n'    => [
-                'connectionFailed'    => __('Connection test failed. Please check your credentials.', 'owlstack'),
-                'testMessageFailed'   => __('Failed to send test message. Please check your credentials.', 'owlstack'),
-                'noPlatformsSelected' => __('Please select at least one platform.', 'owlstack'),
-                'viewPost'            => __('View Post', 'owlstack'),
-                'publishFailed'       => __('Publishing failed. Please try again.', 'owlstack'),
-                'unknownError'        => __('An unknown error occurred.', 'owlstack'),
+                'connectionFailed'    => __('Connection test failed. Please check your credentials.', 'fopost-social'),
+                'testMessageFailed'   => __('Failed to send test message. Please check your credentials.', 'fopost-social'),
+                'noPlatformsSelected' => __('Please select at least one platform.', 'fopost-social'),
+                'viewPost'            => __('View Post', 'fopost-social'),
+                'publishFailed'       => __('Publishing failed. Please try again.', 'fopost-social'),
+                'unknownError'        => __('An unknown error occurred.', 'fopost-social'),
             ],
         ]);
     }

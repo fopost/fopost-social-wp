@@ -19,9 +19,9 @@ class CloudPromo
     /** Platforms reachable through Cloud, against the 11 this plugin publishes to directly. */
     public const CLOUD_PLATFORM_COUNT = 31;
 
-    private const DISMISS_META = 'owlstack_cloud_promo_dismissed';
+    private const DISMISS_META = 'fopost_social_cloud_promo_dismissed';
 
-    private const DISMISS_ACTION = 'owlstack_dismiss_cloud_promo';
+    private const DISMISS_ACTION = 'fopost_social_dismiss_cloud_promo';
 
     /**
      * Build a tagged link to the marketing site so signups can be attributed.
@@ -78,7 +78,7 @@ class CloudPromo
     public static function handleDismiss(): void
     {
         if (! current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have permission to do that.', 'owlstack'));
+            wp_die(esc_html__('You do not have permission to do that.', 'fopost-social'));
         }
 
         check_admin_referer(self::DISMISS_ACTION);
@@ -89,7 +89,7 @@ class CloudPromo
             update_user_meta($userId, self::DISMISS_META, '1');
         }
 
-        wp_safe_redirect(admin_url('admin.php?page=owlstack'));
+        wp_safe_redirect(admin_url('admin.php?page=fopost-social'));
         exit;
     }
 }

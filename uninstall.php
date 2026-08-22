@@ -24,8 +24,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 // If autoloader failed or class not found, clean up manually.
 if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     // Minimal fallback cleanup without autoloader.
-    delete_option('owlstack_settings');
-    delete_option('owlstack_db_version');
+    delete_option('fopost_social_settings');
+    delete_option('fopost_social_db_version');
 
     global $wpdb;
 
@@ -34,7 +34,7 @@ if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     $wpdb->query(
         $wpdb->prepare(
             "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
-            '_owlstack_%'
+            '_fopost_social_%'
         )
     );
 
@@ -43,7 +43,7 @@ if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     $wpdb->query(
         $wpdb->prepare(
             "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
-            'owlstack_token_%'
+            'fopost_social_token_%'
         )
     );
 
@@ -52,14 +52,14 @@ if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     // DROP TABLE to avoid a direct schema-change query that Plugin Check flags.
 
     // Remove capabilities from all roles.
-    $owlstack_capabilities = ['manage_owlstack', 'owlstack_publish', 'owlstack_view_logs'];
-    foreach (wp_roles()->roles as $owlstack_role_name => $owlstack_role_data) {
-        $owlstack_role = get_role($owlstack_role_name);
-        if ($owlstack_role === null) {
+    $fopost_social_capabilities = ['manage_fopost_social', 'fopost_social_publish', 'fopost_social_view_logs'];
+    foreach (wp_roles()->roles as $fopost_social_role_name => $fopost_social_role_data) {
+        $fopost_social_role = get_role($fopost_social_role_name);
+        if ($fopost_social_role === null) {
             continue;
         }
-        foreach ($owlstack_capabilities as $owlstack_cap) {
-            $owlstack_role->remove_cap($owlstack_cap);
+        foreach ($fopost_social_capabilities as $fopost_social_cap) {
+            $fopost_social_role->remove_cap($fopost_social_cap);
         }
     }
 
@@ -68,8 +68,8 @@ if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     $wpdb->query(
         $wpdb->prepare(
             "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
-            '_transient_owlstack_%',
-            '_transient_timeout_owlstack_%'
+            '_transient_fopost_social_%',
+            '_transient_timeout_fopost_social_%'
         )
     );
 
