@@ -35,7 +35,6 @@ class Uninstaller
     private static function removeOptions(): void
     {
         delete_option('owlstack_settings');
-        delete_option('owlstack_cloud');
         delete_option('owlstack_db_version');
     }
 

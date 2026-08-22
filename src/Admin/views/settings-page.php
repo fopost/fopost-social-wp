@@ -36,10 +36,7 @@ if (! defined('ABSPATH')) {
                 ?>
             </p>
             <p>
-                <a class="button button-primary" href="<?php echo esc_url(admin_url('admin.php?page=owlstack-cloud')); ?>">
-                    <?php esc_html_e('Connect this site to Cloud', 'owlstack'); ?>
-                </a>
-                <a class="button" href="<?php echo esc_url(\Owlstack\WordPress\Admin\CloudPromo::url('/', 'settings-card')); ?>" target="_blank" rel="noopener noreferrer">
+                <a class="button button-primary" href="<?php echo esc_url(\Owlstack\WordPress\Admin\CloudPromo::url('/', 'settings-card')); ?>" target="_blank" rel="noopener noreferrer">
                     <?php esc_html_e('Start a free trial', 'owlstack'); ?>
                 </a>
                 <a class="owlstack-cloud-promo__dismiss" href="<?php echo esc_url(\Owlstack\WordPress\Admin\CloudPromo::dismissUrl()); ?>">

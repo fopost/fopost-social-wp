@@ -102,10 +102,6 @@ Yes. Configure proxy settings in **Owlstack > Settings** for servers that cannot
 
 Delivery logs are stored in a custom database table (`wp_owlstack_delivery_logs`). You can view them under **Owlstack > Delivery Logs**.
 
-= What is the OwlStack Cloud connection? =
-
-If you use the OwlStack Cloud dashboard, you can connect it to your site without sharing a WordPress username or Application Password. Go to **Owlstack > Cloud**, generate a site token, and paste it into the OwlStack dashboard together with your site URL. The token is scoped to a minimal set of plugin endpoints: OwlStack Cloud can create posts (as the author you choose, as a draft or published based on your setting), upload images for featured media, and remove posts it created — nothing else. Only a hash of the token is stored, you can revoke it at any time, and the plugin never makes outbound calls to OwlStack Cloud. The feature is entirely optional and inactive until you generate a token.
-
 == Third-Party Services ==
 
 This plugin connects to external third-party services to publish your content. Data such as post title, excerpt, URL, and featured image may be sent to the platforms you configure. **No data is sent unless you explicitly configure and enable a platform.**
