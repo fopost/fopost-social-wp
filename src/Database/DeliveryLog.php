@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Database;
+namespace Fopost\Social\Wp\Database;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Delivery\DeliveryStatus;
-use Owlstack\Core\Publishing\PublishResult;
+use Fopost\Social\Delivery\DeliveryStatus;
+use Fopost\Social\Publishing\PublishResult;
 
 /**
  * Repository for CRUD operations on the delivery log table.

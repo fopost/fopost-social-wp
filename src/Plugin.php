@@ -2,45 +2,45 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress;
+namespace Fopost\Social\Wp;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Config\OwlstackConfig;
-use Owlstack\Core\Events\Contracts\EventDispatcherInterface;
-use Owlstack\Core\Formatting\CharacterTruncator;
-use Owlstack\Core\Formatting\HashtagExtractor;
-use Owlstack\Core\Http\Contracts\HttpClientInterface;
-use Owlstack\Core\Platforms\Discord\DiscordFormatter;
-use Owlstack\Core\Platforms\Discord\DiscordPlatform;
-use Owlstack\Core\Platforms\Facebook\FacebookFormatter;
-use Owlstack\Core\Platforms\Facebook\FacebookPlatform;
-use Owlstack\Core\Platforms\Instagram\InstagramPlatform;
-use Owlstack\Core\Platforms\LinkedIn\LinkedInFormatter;
-use Owlstack\Core\Platforms\LinkedIn\LinkedInPlatform;
-use Owlstack\Core\Platforms\Pinterest\PinterestPlatform;
-use Owlstack\Core\Platforms\PlatformRegistry;
-use Owlstack\Core\Platforms\Reddit\RedditFormatter;
-use Owlstack\Core\Platforms\Reddit\RedditPlatform;
-use Owlstack\Core\Platforms\Slack\SlackPlatform;
-use Owlstack\Core\Platforms\Telegram\TelegramFormatter;
-use Owlstack\Core\Platforms\Telegram\TelegramPlatform;
-use Owlstack\Core\Platforms\Tumblr\TumblrPlatform;
-use Owlstack\Core\Platforms\Twitter\TwitterFormatter;
-use Owlstack\Core\Platforms\Twitter\TwitterPlatform;
-use Owlstack\Core\Platforms\WhatsApp\WhatsAppPlatform;
-use Owlstack\Core\Publishing\Publisher;
-use Owlstack\WordPress\Admin\CloudPromo;
-use Owlstack\WordPress\Admin\DeliveryLogsPage;
-use Owlstack\WordPress\Admin\MetaBox;
-use Owlstack\WordPress\Admin\OptionsManager;
-use Owlstack\WordPress\Admin\SettingsPage;
-use Owlstack\WordPress\Auth\WpTokenStore;
-use Owlstack\WordPress\Events\WpEventDispatcher;
-use Owlstack\WordPress\Http\WpHttpClient;
-use Owlstack\WordPress\Publishing\PostPublisher;
-use Owlstack\WordPress\Publishing\SendTo;
-use Owlstack\WordPress\Rest\OwlstackRestController;
+use Fopost\Social\Config\FopostConfig;
+use Fopost\Social\Events\Contracts\EventDispatcherInterface;
+use Fopost\Social\Formatting\CharacterTruncator;
+use Fopost\Social\Formatting\HashtagExtractor;
+use Fopost\Social\Http\Contracts\HttpClientInterface;
+use Fopost\Social\Platforms\Discord\DiscordFormatter;
+use Fopost\Social\Platforms\Discord\DiscordPlatform;
+use Fopost\Social\Platforms\Facebook\FacebookFormatter;
+use Fopost\Social\Platforms\Facebook\FacebookPlatform;
+use Fopost\Social\Platforms\Instagram\InstagramPlatform;
+use Fopost\Social\Platforms\LinkedIn\LinkedInFormatter;
+use Fopost\Social\Platforms\LinkedIn\LinkedInPlatform;
+use Fopost\Social\Platforms\Pinterest\PinterestPlatform;
+use Fopost\Social\Platforms\PlatformRegistry;
+use Fopost\Social\Platforms\Reddit\RedditFormatter;
+use Fopost\Social\Platforms\Reddit\RedditPlatform;
+use Fopost\Social\Platforms\Slack\SlackPlatform;
+use Fopost\Social\Platforms\Telegram\TelegramFormatter;
+use Fopost\Social\Platforms\Telegram\TelegramPlatform;
+use Fopost\Social\Platforms\Tumblr\TumblrPlatform;
+use Fopost\Social\Platforms\Twitter\TwitterFormatter;
+use Fopost\Social\Platforms\Twitter\TwitterPlatform;
+use Fopost\Social\Platforms\WhatsApp\WhatsAppPlatform;
+use Fopost\Social\Publishing\Publisher;
+use Fopost\Social\Wp\Admin\CloudPromo;
+use Fopost\Social\Wp\Admin\DeliveryLogsPage;
+use Fopost\Social\Wp\Admin\MetaBox;
+use Fopost\Social\Wp\Admin\OptionsManager;
+use Fopost\Social\Wp\Admin\SettingsPage;
+use Fopost\Social\Wp\Auth\WpTokenStore;
+use Fopost\Social\Wp\Events\WpEventDispatcher;
+use Fopost\Social\Wp\Http\WpHttpClient;
+use Fopost\Social\Wp\Publishing\PostPublisher;
+use Fopost\Social\Wp\Publishing\SendTo;
+use Fopost\Social\Wp\Rest\FopostRestController;
 
 /**
  * Main plugin class — wires all services and registers WordPress hooks.
@@ -49,7 +49,7 @@ class Plugin
 {
     private static ?self $instance = null;
 
-    private ?OwlstackConfig $config = null;
+    private ?FopostConfig $config = null;
     private ?HttpClientInterface $httpClient = null;
     private ?EventDispatcherInterface $eventDispatcher = null;
     private ?PlatformRegistry $registry = null;
@@ -100,7 +100,7 @@ class Plugin
         add_action('admin_notices', [$this, 'showActivationNotice']);
 
         // REST API.
-        add_action('rest_api_init', [OwlstackRestController::class, 'register']);
+        add_action('rest_api_init', [FopostRestController::class, 'register']);
 
         // Post publishing hook.
         add_action('transition_post_status', [PostPublisher::class, 'handle'], 10, 3);
@@ -108,7 +108,7 @@ class Plugin
 
     // ── Service accessors ────────────────────────────────────────────────
 
-    public function config(): OwlstackConfig
+    public function config(): FopostConfig
     {
         if ($this->config === null) {
             $this->buildServices();
@@ -382,16 +382,16 @@ class Plugin
 
         wp_enqueue_style(
             'owlstack-admin',
-            OWLSTACK_URL . 'assets/css/admin.css',
+            FOPOST_SOCIAL_URL . 'assets/css/admin.css',
             [],
-            OWLSTACK_VERSION,
+            FOPOST_SOCIAL_VERSION,
         );
 
         wp_enqueue_script(
             'owlstack-admin',
-            OWLSTACK_URL . 'assets/js/admin.js',
+            FOPOST_SOCIAL_URL . 'assets/js/admin.js',
             ['jquery'],
-            OWLSTACK_VERSION,
+            FOPOST_SOCIAL_VERSION,
             true,
         );
 

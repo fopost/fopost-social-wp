@@ -1,11 +1,11 @@
 {
-    "name": "owlstack/owlstack-wordpress",
-    "description": "WordPress plugin for Owlstack — publish content to Telegram, X (Twitter), and Facebook from your WordPress site.",
+    "name": "fopost/social-wordpress",
+    "description": "WordPress plugin for FoPost: publish content to Telegram, X (Twitter), and Facebook from your WordPress site.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "keywords": [
         "wordpress",
-        "owlstack",
+        "fopost",
         "social-media",
         "telegram",
         "twitter",
@@ -16,15 +16,14 @@
     ],
     "authors": [
         {
-            "name": "Ali Hesari",
-            "email": "ali@alihesari.com",
-            "homepage": "https://owlstack.app",
+            "name": "FoPost",
+            "homepage": "https://fopost.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "owlstack/owlstack-core": "^1.0"
+        "fopost/social-core": "^1.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
@@ -33,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Owlstack\\WordPress\\": "src/"
+            "Fopost\\Social\\Wp\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -41,7 +40,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Owlstack\\WordPress\\Tests\\": "tests/"
+            "Fopost\\Social\\Wp\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",

@@ -1,7 +1,7 @@
 /**
  * Owlstack WordPress Admin Scripts
  *
- * @package Owlstack\WordPress
+ * @package Fopost\Social\Wp
  */
 
 (function ($) {

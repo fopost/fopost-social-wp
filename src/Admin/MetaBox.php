@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Admin;
+namespace Fopost\Social\Wp\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\WordPress\Plugin;
+use Fopost\Social\Wp\Plugin;
 use WP_Post;
 
 /**

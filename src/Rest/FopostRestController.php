@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Rest;
+namespace Fopost\Social\Wp\Rest;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Content\Post;
-use Owlstack\WordPress\Admin\MetaBox;
-use Owlstack\WordPress\Database\DeliveryLog;
-use Owlstack\WordPress\Plugin;
+use Fopost\Social\Content\Post;
+use Fopost\Social\Wp\Admin\MetaBox;
+use Fopost\Social\Wp\Database\DeliveryLog;
+use Fopost\Social\Wp\Plugin;
 
 /**
  * REST API controller for Owlstack endpoints.
@@ -21,7 +21,7 @@ use Owlstack\WordPress\Plugin;
  *   GET    /owlstack/v1/delivery-logs
  *   DELETE /owlstack/v1/delivery-logs/(?P<id>\d+)
  */
-class OwlstackRestController
+class FopostRestController
 {
     private const NAMESPACE = 'owlstack/v1';
 

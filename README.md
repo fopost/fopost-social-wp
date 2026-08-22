@@ -63,7 +63,7 @@ owlstack()->facebook('Hello from WordPress!', 'link', ['link' => 'https://exampl
 owlstack()->publish($post, 'linkedin');
 
 // Publish to all configured platforms
-$post = new \Owlstack\Core\Content\Post(
+$post = new \Fopost\Social\Content\Post(
     title: 'My Post',
     body: 'Hello world!',
     url: 'https://example.com/my-post',

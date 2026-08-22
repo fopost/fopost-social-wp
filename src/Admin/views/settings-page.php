@@ -7,7 +7,7 @@ if (! defined('ABSPATH')) {
 }
 
 /** @var array $platforms */
-/** @var \Owlstack\WordPress\Admin\OptionsManager $optionsManager */
+/** @var \Fopost\Social\Wp\Admin\OptionsManager $optionsManager */
 /** @var string[] $configuredNames */
 ?>
 <div class="wrap owlstack-settings">
@@ -20,7 +20,7 @@ if (! defined('ABSPATH')) {
     settings_errors('owlstack_settings');
     ?>
 
-    <?php if (! \Owlstack\WordPress\Admin\CloudPromo::isDismissed()): ?>
+    <?php if (! \Fopost\Social\Wp\Admin\CloudPromo::isDismissed()): ?>
         <div class="owlstack-cloud-promo notice notice-info">
             <h2 class="owlstack-cloud-promo__title">
                 <?php esc_html_e('Publish beyond this site with OwlStack Cloud', 'owlstack'); ?>
@@ -31,15 +31,15 @@ if (! defined('ABSPATH')) {
                     /* translators: 1: platforms this plugin supports, 2: platforms OwlStack Cloud supports */
                     esc_html__('This plugin publishes to %1$d platforms straight from WordPress using your own credentials, and it always will. OwlStack Cloud reaches %2$d platforms and adds scheduling, a content calendar, analytics, and AI drafting, with this site as one of its destinations.', 'owlstack'),
                     count($platforms),
-                    (int) \Owlstack\WordPress\Admin\CloudPromo::CLOUD_PLATFORM_COUNT,
+                    (int) \Fopost\Social\Wp\Admin\CloudPromo::CLOUD_PLATFORM_COUNT,
                 );
                 ?>
             </p>
             <p>
-                <a class="button button-primary" href="<?php echo esc_url(\Owlstack\WordPress\Admin\CloudPromo::url('/', 'settings-card')); ?>" target="_blank" rel="noopener noreferrer">
+                <a class="button button-primary" href="<?php echo esc_url(\Fopost\Social\Wp\Admin\CloudPromo::url('/', 'settings-card')); ?>" target="_blank" rel="noopener noreferrer">
                     <?php esc_html_e('Start a free trial', 'owlstack'); ?>
                 </a>
-                <a class="owlstack-cloud-promo__dismiss" href="<?php echo esc_url(\Owlstack\WordPress\Admin\CloudPromo::dismissUrl()); ?>">
+                <a class="owlstack-cloud-promo__dismiss" href="<?php echo esc_url(\Fopost\Social\Wp\Admin\CloudPromo::dismissUrl()); ?>">
                     <?php esc_html_e('Dismiss', 'owlstack'); ?>
                 </a>
             </p>

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Events;
+namespace Fopost\Social\Wp\Events;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\Core\Events\Contracts\EventDispatcherInterface;
+use Fopost\Social\Events\Contracts\EventDispatcherInterface;
 
 /**
  * Bridges Owlstack Core's EventDispatcherInterface to WordPress actions.

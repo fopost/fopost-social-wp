@@ -10,7 +10,7 @@
  * WordPress implementation is absent. In-memory post/meta stores live in
  * $GLOBALS so tests can reset and inspect them.
  *
- * @package Owlstack\WordPress\Tests
+ * @package Fopost\Social\Wp\Tests
  */
 
 $GLOBALS['owlstack_test_posts'] = [];

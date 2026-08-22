@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress;
+namespace Fopost\Social\Wp;
 
 defined( 'ABSPATH' ) || exit;
 
-use Owlstack\WordPress\Database\DeliveryLogTable;
+use Fopost\Social\Wp\Database\DeliveryLogTable;
 
 /**
  * Handles complete plugin uninstallation.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Tests\Unit\Admin;
+namespace Fopost\Social\Wp\Tests\Unit\Admin;
 
-use Owlstack\WordPress\Admin\CloudPromo;
-use Owlstack\WordPress\Tests\TestCase;
+use Fopost\Social\Wp\Admin\CloudPromo;
+use Fopost\Social\Wp\Tests\TestCase;
 
 class CloudPromoTest extends TestCase
 {

@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
 
 wp_nonce_field('owlstack_meta_box', 'owlstack_meta_box_nonce');
 
-$owlstack_platform_labels = \Owlstack\WordPress\Admin\SettingsPage::platforms();
+$owlstack_platform_labels = \Fopost\Social\Wp\Admin\SettingsPage::platforms();
 ?>
 
 <div class="owlstack-meta-box">

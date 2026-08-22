@@ -11,7 +11,7 @@
  * the function doesn't already exist (so integration tests with a real
  * WP bootstrap still work).
  *
- * @package Owlstack\WordPress\Tests
+ * @package Fopost\Social\Wp\Tests
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

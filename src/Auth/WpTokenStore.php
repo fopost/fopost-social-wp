@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Auth;
+namespace Fopost\Social\Wp\Auth;
 
 defined( 'ABSPATH' ) || exit;
 
 use DateTimeImmutable;
-use Owlstack\Core\Auth\AccessToken;
-use Owlstack\Core\Auth\Contracts\TokenStoreInterface;
+use Fopost\Social\Auth\AccessToken;
+use Fopost\Social\Auth\Contracts\TokenStoreInterface;
 
 /**
  * WordPress wp_options-based token storage with encryption.

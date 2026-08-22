@@ -6,7 +6,7 @@
  * Fired when the plugin is uninstalled. Cleans up all plugin data
  * including options, custom database tables, and capabilities.
  *
- * @package Owlstack\WordPress
+ * @package Fopost\Social\Wp
  */
 
 declare(strict_types=1);
@@ -22,7 +22,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 
 // If autoloader failed or class not found, clean up manually.
-if (! class_exists(\Owlstack\WordPress\Uninstaller::class)) {
+if (! class_exists(\Fopost\Social\Wp\Uninstaller::class)) {
     // Minimal fallback cleanup without autoloader.
     delete_option('owlstack_settings');
     delete_option('owlstack_db_version');
@@ -76,4 +76,4 @@ if (! class_exists(\Owlstack\WordPress\Uninstaller::class)) {
     return;
 }
 
-\Owlstack\WordPress\Uninstaller::uninstall();
+\Fopost\Social\Wp\Uninstaller::uninstall();

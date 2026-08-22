@@ -8,7 +8,7 @@ if (! defined('ABSPATH')) {
 
 /** @var array{label: string, description: string, docs_url: string, fields: array} $platform */
 /** @var string $platformSlug */
-/** @var \Owlstack\WordPress\Admin\OptionsManager $optionsManager */
+/** @var \Fopost\Social\Wp\Admin\OptionsManager $optionsManager */
 ?>
 <div class="wrap owlstack-settings owlstack-platform-settings">
     <h1>

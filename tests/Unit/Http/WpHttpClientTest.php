@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Tests\Unit\Http;
+namespace Fopost\Social\Wp\Tests\Unit\Http;
 
-use Owlstack\WordPress\Http\WpHttpClient;
-use Owlstack\WordPress\Tests\TestCase;
+use Fopost\Social\Wp\Http\WpHttpClient;
+use Fopost\Social\Wp\Tests\TestCase;
 
 class WpHttpClientTest extends TestCase
 {
@@ -20,7 +20,7 @@ class WpHttpClientTest extends TestCase
     public function test_it_implements_http_client_interface(): void
     {
         $this->assertInstanceOf(
-            \Owlstack\Core\Http\Contracts\HttpClientInterface::class,
+            \Fopost\Social\Http\Contracts\HttpClientInterface::class,
             $this->client,
         );
     }

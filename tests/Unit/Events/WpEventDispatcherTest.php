@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Owlstack\WordPress\Tests\Unit\Events;
+namespace Fopost\Social\Wp\Tests\Unit\Events;
 
-use Owlstack\WordPress\Events\WpEventDispatcher;
-use Owlstack\WordPress\Tests\TestCase;
+use Fopost\Social\Wp\Events\WpEventDispatcher;
+use Fopost\Social\Wp\Tests\TestCase;
 
 class WpEventDispatcherTest extends TestCase
 {
@@ -20,7 +20,7 @@ class WpEventDispatcherTest extends TestCase
     public function test_it_implements_event_dispatcher_interface(): void
     {
         $this->assertInstanceOf(
-            \Owlstack\Core\Events\Contracts\EventDispatcherInterface::class,
+            \Fopost\Social\Events\Contracts\EventDispatcherInterface::class,
             $this->dispatcher,
         );
     }
