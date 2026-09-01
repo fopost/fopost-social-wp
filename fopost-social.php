@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       FoPost Social
- * Plugin URI:        https://fopost.com
+ * Plugin URI:        https://github.com/fopost/fopost-social-wp
  * Description:       Publish content to Telegram, X (Twitter), Facebook, Instagram, LinkedIn, Discord, and more, directly from WordPress with your own platform credentials.
  * Version:           1.1.2
  * Requires at least: 6.4
