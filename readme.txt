@@ -1,5 +1,5 @@
 === FoPost Social ===
-Contributors: fopost
+Contributors: fopost, alihesari
 Donate link: https://fopost.com
 Tags: social media, auto publish, telegram, twitter, facebook
 Requires at least: 6.4
